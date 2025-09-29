@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant U as User
+    participant NI as NFT Item
+    participant DAO as ToncastDAO
+    participant JW as Jetton Wallet
+    participant E as Epoch Contract
+    
+    U->>NI: transfer(DAO_address)
+    NI->>DAO: NftTransferNotification
+    DAO->>DAO: storePendingWithdrawal()
+    DAO->>NI: NftGetAllData
+    NI->>DAO: NftReportAllData
+    DAO->>DAO: validateNFT() + parseStakingData()
+    DAO->>DAO: updateTotalStaked(-amount)
+    DAO->>JW: jettonTransfer(originalOwner)
+    DAO->>DAO: ProcessEpochPayouts (internal)
+    DAO->>E: PayoutStaker (multiple epochs)

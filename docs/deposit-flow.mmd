@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant U as User
+    participant JW as Jetton Wallet
+    participant DAO as ToncastDAO
+    participant NC as NFT Collection
+    participant NI as NFT Item
+    
+    U->>JW: transfer(amount, DAO_address)
+    JW->>DAO: JettonTransferNotification
+    DAO->>DAO: validateJettonWallet()
+    DAO->>DAO: updateTotalStaked(+amount)
+    DAO->>NC: mintMessage(index, content)
+    NC->>NI: deploy + initialize
+    DAO->>DAO: checkAndUpdateEpoch()

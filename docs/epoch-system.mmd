@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant DAO as ToncastDAO
+    participant E as Epoch Contract
+    participant U as User
+    
+    Note over DAO: checkAndUpdateEpoch() called on each deposit
+    DAO->>DAO: getCurrentEpochNumber()
+    alt currentEpoch > lastProcessedEpoch
+        DAO->>E: deploy(epochNumber, totalStaked)
+        E->>E: initialize(totalTonReceived, totalToncastStaked)
+        DAO->>DAO: lastProcessedEpoch = currentEpoch
+    end
+    
+    Note over DAO: During withdrawal
+    DAO->>E: PayoutStaker(userAddress, amount)
+    E->>E: calculateReward()
+    E->>U: TON reward

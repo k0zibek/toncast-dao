@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tact-lang/tact/main/src/config/configSchema.json",
+  "projects": [
+    {
+      "name": "ToncastDAO",
+      "path": "contracts/toncast_d_a_o.tact",
+      "output": "build/ToncastDAO",
+      "options": {
+        "debug": false,
+        "external": false
+      },
+      "mode": "full"
+    },
+    {
+      "name": "ToncastDAOepoch",
+      "path": "contracts/toncast_dao_epoch.tact",
+      "output": "build/ToncastDAOepoch",
+      "options": {
+        "debug": false,
+        "external": false
+      },
+      "mode": "full"
+    }
+  ]
+}

@@ -60,6 +60,11 @@ message(0x7b7b7b7b) NftReportAllData {
     data: Cell; // Contains addresses and staking_data
 }
 
+// Stop and redirect message - owner can stop the DAO and redirect funds to new DAO
+message(0x53544f50) StopAndRedirect {  // 0x53544f50 = "STOP" in hex
+    newDaoAddress: Address;
+}
+
 // ===== DAO STRUCTURES =====
 
 // Jetton wallet data structure
@@ -97,4 +102,6 @@ struct DAOConfigData {
     nftNamePrefix: String;
     nftImageUrl: String;
     isReadyToAcceptDeposits: Bool;
+    stopped: Bool;
+    newDaoAddress: Address?;
 }

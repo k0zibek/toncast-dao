@@ -662,4 +662,62 @@ describe('ToncastDAO', () => {
             // In a real scenario with properly deployed NFT, this would succeed
         });
     });
+    
+    describe('Stop and Redirect', () => {
+        it('should allow owner to stop and redirect DAO', async () => {
+            // Deploy new DAO address (mock)
+            const newDAO = await blockchain.treasury('new-dao');
+            
+            // Get initial state
+            const configBefore = await toncastDAO.getGetDaoConfigData();
+            expect(configBefore.stopped).toBe(false);
+            expect(configBefore.newDaoAddress).toBeNull();
+            
+            // Send StopAndRedirect message from owner
+            const stopResult = await toncastDAO.send(
+                deployer.getSender(),
+                {
+                    value: toNano('0.05'),
+                },
+                {
+                    $$type: 'StopAndRedirect',
+                    newDaoAddress: newDAO.address
+                }
+            );
+            
+            expect(stopResult.transactions).toHaveTransaction({
+                from: deployer.address,
+                to: toncastDAO.address,
+                success: true,
+            });
+            
+            // Check state after stop
+            const configAfter = await toncastDAO.getGetDaoConfigData();
+            expect(configAfter.stopped).toBe(true);
+            expect(configAfter.newDaoAddress?.toString()).toBe(newDAO.address.toString());
+        });
+        
+        it('should reject stop from non-owner', async () => {
+            const newDAO = await blockchain.treasury('new-dao');
+            
+            // Try to stop from non-owner
+            const stopResult = await toncastDAO.send(
+                user.getSender(),
+                {
+                    value: toNano('0.05'),
+                },
+                {
+                    $$type: 'StopAndRedirect',
+                    newDaoAddress: newDAO.address
+                }
+            );
+            
+            expect(stopResult.transactions).toHaveTransaction({
+                from: user.address,
+                to: toncastDAO.address,
+                success: false,
+                exitCode: 132, // Access denied
+            });
+        });
+    });
 });

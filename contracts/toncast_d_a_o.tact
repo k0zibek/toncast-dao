@@ -221,6 +221,7 @@ inline fun calculateEpochContractAddress(epochNumber: Int, daoAddress: Address):
 
 contract ToncastDAO with Ownable {
     owner: Address;                      // Contract owner
+    stopped: Bool;                       // Whether the contract is stopped
     nftCollectionAddress: Address?;      // NFT collection address for minting (set on deploy)
     jettonMasterAddress: Address;        // Toncast Jetton master contract address
     minDepositAmount: Int as coins;     // Minimum amount of Toncast tokens to deposit (default: 1 TONCAST)
@@ -231,6 +232,7 @@ contract ToncastDAO with Ownable {
     pendingWithdrawalOwners: map<Address, Address>; // Map of NFT addresses to original owners
     collectionMetadata: Cell;            // NFT collection metadata in TEP-64 format
     seq: Int as uint32;                  // Sequence number for unique contract address
+    newDaoAddress: Address?;             // New DAO address for fund forwarding when stopped
     
     // Epoch tracking
     deployTime: Int as uint64;           // Contract deploy timestamp
@@ -250,6 +252,7 @@ contract ToncastDAO with Ownable {
         seq: Int as uint32
     ) {
         self.owner = owner;
+        self.stopped = false;
         self.jettonMasterAddress = jettonMasterAddress;
         self.minDepositAmount = minDepositAmount;
         self.nextItemIndex = nextItemIndex;
@@ -259,6 +262,7 @@ contract ToncastDAO with Ownable {
         self.pendingWithdrawalOwners = emptyMap();
         self.collectionMetadata = collectionMetadata;
         self.seq = seq;
+        self.newDaoAddress = null;
 
         // Initialize epoch tracking
         self.deployTime = now();
@@ -279,8 +283,24 @@ contract ToncastDAO with Ownable {
         return timePassed / self.epochDuration;
     }
     
-    // Check and send accumulated funds to epoch
+    // Check and send accumulated funds to epoch or forward to new DAO if stopped
     inline fun checkAndUpdateEpoch() {
+        // If stopped, forward accumulated funds to new DAO instead of creating epochs
+        if (self.stopped) {
+            // Forward all accumulated TON to new DAO (rewards from deposits/withdrawals)
+            if (self.newDaoAddress != null) {
+                let balance: Int = myBalance();
+                if (balance > ton("0.05")) {
+                    message(MessageParameters{
+                        to: self.newDaoAddress!!,
+                        value: balance - ton("0.05"),
+                        mode: SendIgnoreErrors,
+                        body: null
+                    });
+                }
+            }
+            return;
+        }
         
         let currentEpoch: Int = self.getCurrentEpochNumber();
         
@@ -320,6 +340,9 @@ contract ToncastDAO with Ownable {
 
     // Handle Jetton transfer notification when user sends Toncast tokens
     receive(msg: JettonTransferNotification) {
+        // Deposits are allowed even when stopped (users can still stake)
+        // Only epoch creation is prevented when stopped
+        
         // Calculate expected jetton wallet address
         let expectedJettonWallet: Address = calculateJettonWalletAddress(
             myAddress(),  // This contract is the owner of its jetton wallet
@@ -369,6 +392,7 @@ contract ToncastDAO with Ownable {
     
     // Handle NFT transfer notification when NFT is sent to DAO for withdrawal
     receive(msg: NftTransferNotification) {
+        // Allow withdrawals even if stopped (users should be able to get their funds back)
         // Verify NFT collection is deployed
         throwUnless(410, self.nftCollectionAddress != null); // 410 - Collection not deployed
         
@@ -600,6 +624,24 @@ contract ToncastDAO with Ownable {
         self.nftCollectionAddress = expectedAddress;
     }
     
+    // Handle stop and redirect message from owner
+    receive(msg: StopAndRedirect) {
+        self.requireOwner(); // Only owner can stop
+        self.stopped = true;
+        self.newDaoAddress = msg.newDaoAddress;
+        
+        // Forward any remaining balance to new DAO
+        let balance: Int = myBalance();
+        if (balance > ton("0.05")) {
+            message(MessageParameters{
+                to: msg.newDaoAddress,
+                value: balance - ton("0.05"),
+                mode: SendIgnoreErrors,
+                body: null
+            });
+        }
+    }
+    
     receive(msg: Slice) { 
             self.checkAndUpdateEpoch();
     }
@@ -614,7 +656,9 @@ contract ToncastDAO with Ownable {
             minDepositAmount: self.minDepositAmount,
             nftNamePrefix: self.nftNamePrefix,
             nftImageUrl: self.nftImageUrl,
-            isReadyToAcceptDeposits: self.nftCollectionAddress != null
+            isReadyToAcceptDeposits: self.nftCollectionAddress != null,
+            stopped: self.stopped,
+            newDaoAddress: self.newDaoAddress
         };
     }
     

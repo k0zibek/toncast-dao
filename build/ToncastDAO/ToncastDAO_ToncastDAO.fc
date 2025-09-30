@@ -1,0 +1,1479 @@
+#pragma version =0.4.6;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+;; ToncastDAO_ToncastDAO.headers.fc
+;;
+;; Header files for ToncastDAO
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_store_address_opt
+builder __tact_store_address_opt(builder b, slice address) inline;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) impure inline;
+
+;; __tact_crc16
+(slice) __tact_crc16(slice data) inline_ref;
+
+;; __tact_base64_encode
+(slice) __tact_base64_encode(slice data) inline_ref;
+
+;; __tact_address_to_user_friendly
+(slice) __tact_address_to_user_friendly(slice address) inline_ref;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_string_builder_start
+tuple __tact_string_builder_start(builder b) inline;
+
+;; __tact_string_builder_start_tail_string
+tuple __tact_string_builder_start_tail_string() inline;
+
+;; __tact_string_builder_start_string
+tuple __tact_string_builder_start_string() inline;
+
+;; __tact_string_builder_end
+cell __tact_string_builder_end(tuple builders) inline;
+
+;; __tact_string_builder_end_slice
+slice __tact_string_builder_end_slice(tuple builders) inline;
+
+;; __tact_string_builder_append
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref;
+
+;; __tact_string_builder_append_not_mut
+(tuple) __tact_string_builder_append_not_mut(tuple builders, slice sc) inline_ref;
+
+;; __tact_dict_get_slice_slice
+slice __tact_dict_get_slice_slice(cell d, int kl, slice k) inline;
+
+;; __tact_dict_set_slice_slice
+(cell, ()) __tact_dict_set_slice_slice(cell d, int kl, slice k, slice v) inline;
+
+;; __tact_dict_get_slice_int
+int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline;
+
+;; __tact_dict_set_slice_int
+(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline;
+
+;; __tact_dict_set_uint_cell
+(cell, ()) __tact_dict_set_uint_cell(cell d, int kl, int k, cell v) inline;
+
+;; $DeployEpoch$_store
+builder $DeployEpoch$_store(builder build_0, (int) v) inline;
+
+;; $DeployEpoch$_store_cell
+cell $DeployEpoch$_store_cell((int) v, builder b) inline;
+
+;; $PayoutStaker$_store
+builder $PayoutStaker$_store(builder build_0, (int, slice, int) v) inline;
+
+;; $PayoutStaker$_store_cell
+cell $PayoutStaker$_store_cell((int, slice, int) v, builder b) inline;
+
+;; $ProcessEpochPayouts$_store
+builder $ProcessEpochPayouts$_store(builder build_0, (slice, int, int, int) v) inline;
+
+;; $ProcessEpochPayouts$_store_cell
+cell $ProcessEpochPayouts$_store_cell((slice, int, int, int) v, builder b) inline;
+
+;; $NftGetAllData$_store
+builder $NftGetAllData$_store(builder build_0, (int) v) inline;
+
+;; $NftGetAllData$_store_cell
+cell $NftGetAllData$_store_cell((int) v, builder b) inline;
+
+;; $ToncastDAO$_store
+builder $ToncastDAO$_store(builder build_0, (slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) v) inline;
+
+;; $ToncastDAO$_load
+(slice, ((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int))) $ToncastDAO$_load(slice sc_0) inline;
+
+;; $Context$_get_value
+_ $Context$_get_value((int, slice, int, slice) v) inline;
+
+;; $DAOEpochData$_to_external
+(int, int, int, int, int) $DAOEpochData$_to_external(((int, int, int, int, int)) v) inline;
+
+;; $DAOConfigData$_to_external
+(int, slice, slice, slice, int, slice, slice, int, int, slice) $DAOConfigData$_to_external(((int, slice, slice, slice, int, slice, slice, int, int, slice)) v) inline;
+
+;; $ToncastDAOepoch$init$_store
+builder $ToncastDAOepoch$init$_store(builder build_0, (slice, int) v) inline;
+
+;; $ToncastDAO$init$_load
+(slice, ((slice, slice, int, int, slice, slice, int, cell, int))) $ToncastDAO$init$_load(slice sc_0) inline;
+
+;; $ToncastDAO$_contract_init
+(slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $ToncastDAO$_contract_init(slice $owner, slice $jettonMasterAddress, int $minDepositAmount, int $nextItemIndex, slice $nftNamePrefix, slice $nftImageUrl, int $epochDuration, cell $collectionMetadata, int $seq) impure inline;
+
+;; $ToncastDAO$_contract_load
+(slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $ToncastDAO$_contract_load() impure inline;
+
+;; $ToncastDAO$_contract_store
+() $ToncastDAO$_contract_store((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) v) impure inline;
+
+;; $Cell$_fun_asSlice
+slice $Cell$_fun_asSlice(cell $self) impure inline;
+
+;; $global_newAddress
+slice $global_newAddress(int $chain, int $hash) impure inline;
+
+;; $global_contractAddressExt
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $StakingData$_constructor_amount_timestamp_daoAddress
+((int, int, slice)) $StakingData$_constructor_amount_timestamp_daoAddress(int $amount, int $timestamp, slice $daoAddress) inline;
+
+;; $global_parseStakingData
+(int, int, slice) $global_parseStakingData(cell $stakingCell) impure inline;
+
+;; $String$_fun_asMetadataCell
+cell $String$_fun_asMetadataCell(slice $self) impure inline;
+
+;; $global_composeItemMetadata
+cell $global_composeItemMetadata(slice $name, slice $description, slice $image) impure inline;
+
+;; $global_buildCollectionInitData
+cell $global_buildCollectionInitData(slice $owner, cell $itemCode, cell $contentContainer) impure inline;
+
+;; $global_buildNftIndividualContent
+cell $global_buildNftIndividualContent(slice $owner, slice $namePrefix, slice $baseImageUrl, int $itemIndex, int $depositAmount) impure inline;
+
+;; $global_buildMintMessage
+cell $global_buildMintMessage(int $queryId, int $itemIndex, int $forwardAmount, cell $individualContent) impure inline;
+
+;; $StateInit$_constructor_code_data
+((cell, cell)) $StateInit$_constructor_code_data(cell $code, cell $data) inline;
+
+;; $global_calculateJettonWalletAddress
+slice $global_calculateJettonWalletAddress(slice $ownerAddress, slice $jettonMasterAddress) impure inline_ref;
+
+;; $global_calculateNftItemAddress
+slice $global_calculateNftItemAddress(slice $collectionAddress, int $itemIndex) impure inline;
+
+;; $ToncastDAOepoch$_init_child
+(cell, cell) $ToncastDAOepoch$_init_child(slice $owner, int $epochNumber) inline_ref;
+
+;; $global_calculateEpochContractAddress
+slice $global_calculateEpochContractAddress(int $epochNumber, slice $daoAddress) impure inline;
+
+;; $ToncastDAO$_fun_getCurrentEpochNumber
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), int) $ToncastDAO$_fun_getCurrentEpochNumber((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline;
+
+;; $MessageParameters$_constructor_to_value_mode_body
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_mode_body(slice $to, int $value, int $mode, cell $body) inline;
+
+;; $DeployParameters$_constructor_init_value_mode_body
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_init_value_mode_body((cell, cell) $init, int $value, int $mode, cell $body) inline;
+
+;; $DeployEpoch$_constructor_totalToncastStaked
+((int)) $DeployEpoch$_constructor_totalToncastStaked(int $totalToncastStaked) inline;
+
+;; $ToncastDAO$_fun_checkAndUpdateEpoch
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), ()) $ToncastDAO$_fun_checkAndUpdateEpoch((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline;
+
+;; $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress
+((int, slice, slice, slice, int, slice, slice, int, int, slice)) $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress(int $nextItemIndex, slice $nftCollectionAddress, slice $jettonMasterAddress, slice $jettonWalletAddress, int $minDepositAmount, slice $nftNamePrefix, slice $nftImageUrl, int $isReadyToAcceptDeposits, int $stopped, slice $newDaoAddress) inline;
+
+;; $ToncastDAO$_fun_getDAOConfigData
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), (int, slice, slice, slice, int, slice, slice, int, int, slice)) $ToncastDAO$_fun_getDAOConfigData((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref;
+
+;; $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked
+((int, int, int, int, int)) $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked(int $deployTime, int $currentRealTimeEpoch, int $epochDuration, int $currentStoredEpochNumber, int $totalCurrentlyStaked) inline;
+
+;; $ToncastDAO$_fun_getDAOEpochData
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), (int, int, int, int, int)) $ToncastDAO$_fun_getDAOEpochData((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref;
+
+;; $ToncastDAO$_fun_getEpochContractAddress
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), slice) $ToncastDAO$_fun_getEpochContractAddress((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self, int $epochNumber) impure inline_ref;
+
+;; $ToncastDAO$_fun_getCollectionMetadata
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), cell) $ToncastDAO$_fun_getCollectionMetadata((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref;
+
+;; $ToncastDAO$_fun_requireOwner
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), ()) $ToncastDAO$_fun_requireOwner((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref;
+
+;; $ToncastDAO$_fun_owner
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), slice) $ToncastDAO$_fun_owner((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref;
+
+;; $MessageParameters$_constructor_to_value_body
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_body(slice $to, int $value, cell $body) inline;
+
+;; $NftGetAllData$_constructor_queryId
+((int)) $NftGetAllData$_constructor_queryId(int $queryId) inline;
+
+;; $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch
+((slice, int, int, int)) $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch(slice $userAddress, int $withdrawnAmount, int $startEpoch, int $endEpoch) inline;
+
+;; $PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount
+((int, slice, int)) $PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount(int $queryId, slice $stakerAddress, int $stakerToncastAmount) inline;
+
+
+;; ToncastDAO_ToncastDAO.stdlib.fc
+global (int, slice, int, slice) __tact_context;
+global slice __tact_context_sender;
+global cell __tact_child_contract_codes;
+global int __tact_randomized;
+
+(slice, slice) __tact_load_address_opt(slice cs) asm """
+
+            b{00} SDBEGINSQ
+            IF:<{
+              PUSHNULL
+            }>ELSE<{
+              LDMSGADDR
+              SWAP
+            }>
+
+""";
+
+builder __tact_store_addr_none(builder b) asm "b{00} STSLICECONST";
+
+builder __tact_store_address_opt(builder b, slice address) inline {
+    if (null?(address)) {
+        return __tact_store_addr_none(b);
+    } else {
+        return b.store_slice(address);
+    }
+}
+
+forall X -> X __tact_not_null(X x) impure inline {
+    throw_if(128, null?(x)); return x;
+}
+
+(cell, int) __tact_dict_delete(cell dict, int key_len, slice index) asm(index dict key_len) """
+    DICTDEL
+""";
+
+(slice, int) __tact_dict_get(cell dict, int key_len, slice index) asm(index dict key_len) """
+    DICTGET NULLSWAPIFNOT
+""";
+
+(slice) __tact_preload_offset(slice s, int offset, int bits) asm """
+    SDSUBSTR
+""";
+
+(slice) __tact_crc16(slice data) inline_ref {
+    slice new_data = begin_cell()
+        .store_slice(data)
+        .store_slice("0000"s)
+    .end_cell().begin_parse();
+    int reg = 0;
+    while (~ new_data.slice_data_empty?()) {
+        int byte = new_data~load_uint(8);
+        int mask = 0x80;
+        while (mask > 0) {
+            reg <<= 1;
+            if (byte & mask) {
+                reg += 1;
+            }
+            mask >>= 1;
+            if (reg > 0xffff) {
+                reg &= 0xffff;
+                reg ^= 0x1021;
+            }
+        }
+    }
+    (int q, int r) = divmod(reg, 256);
+    return begin_cell()
+        .store_uint(q, 8)
+        .store_uint(r, 8)
+    .end_cell().begin_parse();
+}
+
+(slice) __tact_base64_encode(slice data) inline_ref {
+    slice chars = "4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F"s;
+    builder res = begin_cell();
+
+    while (data.slice_bits() >= 24) {
+        (int bs1, int bs2, int bs3) = (data~load_uint(8), data~load_uint(8), data~load_uint(8));
+
+        int n = (bs1 << 16) | (bs2 << 8) | bs3;
+
+        res = res
+            .store_slice(__tact_preload_offset(chars, ((n >> 18) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n >> 12) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n >>  6) & 63) * 8, 8))
+            .store_slice(__tact_preload_offset(chars, ((n      ) & 63) * 8, 8));
+    }
+
+    return res.end_cell().begin_parse();
+}
+
+(slice) __tact_address_to_user_friendly(slice address) inline_ref {
+    (int wc, int hash) = address.parse_std_addr();
+
+    slice user_friendly_address = begin_cell()
+        .store_slice("11"s)
+        .store_uint((wc + 0x100) % 0x100, 8)
+        .store_uint(hash, 256)
+    .end_cell().begin_parse();
+
+    slice checksum = __tact_crc16(user_friendly_address);
+    slice user_friendly_address_with_checksum = begin_cell()
+        .store_slice(user_friendly_address)
+        .store_slice(checksum)
+    .end_cell().begin_parse();
+
+    return __tact_base64_encode(user_friendly_address_with_checksum);
+}
+
+(int, slice, int, slice) __tact_context_get() inline {
+    return __tact_context;
+}
+
+slice __tact_context_get_sender() inline {
+    return __tact_context_sender;
+}
+
+tuple __tact_string_builder_start(builder b) inline {
+    return tpush(tpush(empty_tuple(), b), null());
+}
+
+tuple __tact_string_builder_start_tail_string() inline {
+    return __tact_string_builder_start(begin_cell().store_uint(0, 8));
+}
+
+tuple __tact_string_builder_start_string() inline {
+    return __tact_string_builder_start(begin_cell());
+}
+
+cell __tact_string_builder_end(tuple builders) inline {
+    (builder b, tuple tail) = uncons(builders);
+    cell c = b.end_cell();
+    while(~ null?(tail)) {
+        (b, tail) = uncons(tail);
+        c = b.store_ref(c).end_cell();
+    }
+    return c;
+}
+
+slice __tact_string_builder_end_slice(tuple builders) inline {
+    return __tact_string_builder_end(builders).begin_parse();
+}
+
+((tuple), ()) __tact_string_builder_append(tuple builders, slice sc) inline_ref {
+    int sliceRefs = slice_refs(sc);
+    int sliceBits = slice_bits(sc);
+
+    while((sliceBits > 0) | (sliceRefs > 0)) {
+
+        ;; Load the current builder
+        (builder b, tuple tail) = uncons(builders);
+        int remBytes = 127 - (builder_bits(b) / 8);
+        int exBytes = sliceBits / 8;
+
+        ;; Append bits
+        int amount = min(remBytes, exBytes);
+        if (amount > 0) {
+            slice read = sc~load_bits(amount * 8);
+            b = b.store_slice(read);
+        }
+
+        ;; Update builders
+        builders = cons(b, tail);
+
+        ;; Check if we need to add a new cell and continue
+        if (exBytes - amount > 0) {
+            var bb = begin_cell();
+            builders = cons(bb, builders);
+            sliceBits = (exBytes - amount) * 8;
+        } elseif (sliceRefs > 0) {
+            sc = sc~load_ref().begin_parse();
+            sliceRefs = slice_refs(sc);
+            sliceBits = slice_bits(sc);
+        } else {
+            sliceBits = 0;
+            sliceRefs = 0;
+        }
+    }
+
+    return ((builders), ());
+}
+
+(tuple) __tact_string_builder_append_not_mut(tuple builders, slice sc) inline_ref {
+    builders~__tact_string_builder_append(sc);
+    return builders;
+}
+
+slice __tact_dict_get_slice_slice(cell d, int kl, slice k) inline {
+    var (r, ok) = __tact_dict_get(d, kl, k);
+    if (ok) {
+        return r;
+    } else {
+        return null();
+    }
+}
+
+(cell, ()) __tact_dict_set_slice_slice(cell d, int kl, slice k, slice v) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_slice(v)), ());
+    }
+}
+
+int __tact_dict_get_slice_int(cell d, int kl, slice k, int vl) inline {
+    var (r, ok) = __tact_dict_get(d, kl, k);
+    if (ok) {
+        return r~load_int(vl);
+    } else {
+        return null();
+    }
+}
+
+(cell, ()) __tact_dict_set_slice_int(cell d, int kl, slice k, int v, int vl) inline {
+    if (null?(v)) {
+        var (r, ok) = __tact_dict_delete(d, kl, k);
+        return (r, ());
+    } else {
+        return (dict_set_builder(d, kl, k, begin_cell().store_int(v, vl)), ());
+    }
+}
+
+(cell, ()) __tact_dict_set_uint_cell(cell d, int kl, int k, cell v) inline {
+    if (null?(v)) {
+        var (r, ok) = udict_delete?(d, kl, k);
+        return (r, ());
+    } else {
+        return (udict_set_ref(d, kl, k, v), ());
+    }
+}
+
+int $global_now() impure asm """
+    NOW
+""";
+
+builder $global_beginCell() impure asm """
+    NEWC
+""";
+
+int $global_min(int $x, int $y) impure asm """
+    MIN
+""";
+
+int $global_contractHash(cell $code, cell $data) impure asm """
+    s0 PUSH HASHCU // `data` hash
+    s2 PUSH HASHCU // `code` hash
+    SWAP2
+    CDEPTH         // `data` depth
+    SWAP
+    CDEPTH         // `code` depth
+    131380 INT     // (2 << 16) | (1 << 8) | 0x34
+
+    // Group 2: Composition of the Builder
+    NEWC
+    24 STU  // store refs_descriptor | bits_descriptor | data
+    16 STU  // store depth_descriptor for `code`
+    16 STU  // store depth_descriptor for `data`
+    256 STU // store `code` hash
+    256 STU // store `data` hash
+
+    // Group 3: SHA256 hash of the resulting Builder
+    ONE HASHEXT_SHA256
+""";
+
+slice $Slice$_fun_asAddressUnsafe(slice $self) impure asm "NOP";
+
+slice $Cell$_fun_beginParse(cell $self) impure asm """
+    CTOS
+""";
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return $Cell$_fun_beginParse($self);
+}
+
+cell $Builder$_fun_endCell(builder $self) impure asm """
+    ENDC
+""";
+
+slice $global_newAddress(int $chain, int $hash) impure inline {
+    return $Slice$_fun_asAddressUnsafe($Cell$_fun_asSlice($Builder$_fun_endCell(store_uint(store_int(store_uint($global_beginCell(), 4, 3), $chain, 8), $hash, 256))));
+}
+
+slice $global_contractAddressExt(int $chain, cell $code, cell $data) impure inline {
+    int $hash = $global_contractHash($code, $data);
+    return $global_newAddress($chain, $hash);
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return $global_contractAddressExt(0, $s'code, $s'data);
+}
+
+slice $global_myAddress() impure asm """
+    MYADDR
+""";
+
+int $global_myBalance() impure asm """
+    BALANCE FIRST
+""";
+
+() $global_message((int, cell, int, slice, int) $params) impure asm """
+    NEWC
+    b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+    1 STI               // store `bounce`
+    b{000} STSLICECONST // store bounced = false and src = addr_none
+    STSLICE             // store `to`
+    SWAP
+    STGRAMS             // store `value`
+    106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+    STZEROES
+    // → Stack state
+    // s0: Builder
+    // s1: `body`
+    // s2: `mode`
+    STDICT
+    ENDC
+    SWAP
+    SENDRAWMSG
+""";
+
+() $global_deploy((int, cell, int, int, (cell, cell)) $params) impure asm """
+    4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+    HASHCU // `init.data` hash
+    SWAP
+    HASHCU // `init.code` hash
+    SWAP2
+    CDEPTH // `init.data` depth
+    SWAP
+    CDEPTH // `init.code` depth
+
+    // Group 2: Calculating destination address
+    // For almost identical logic and instructions,
+    // see comments inside `contractHash()` function in contract.tact
+    131380 INT // (2 << 16) | (1 << 8) | 0x34
+    NEWC
+    24 STU
+    16 STU
+    16 STU
+    256 STU
+    256 STU
+    ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+    // → Stack state
+    // s0: destAddr(hash part)
+    // s1: `init.data`
+    // s2: `init.code`
+    // s3 and below: `bounce`, `value`, `body`, `mode`
+
+    // Group 3: Building a message (CommonMsgInfoRelaxed)
+    s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+    NEWC
+    b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+    1 STI              // store `bounce`
+    s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+    STREF              // store `init.code`
+    STREF              // store `init.data`
+    // Inline StateInit:
+    b{00010000000000} STSLICECONST
+    // 0 + 00 + 10 + 0 + 00000000
+    // 1) 0 - bounced = false
+    // 2) 00 - src = addr_none
+    // 3) 10 - tag of addr_std (part of dest)
+    // 4) 0 - Maybe Anycast = false
+    // 5) 00000000 - workchain_id (part of dest)
+    //
+    256 STU     // store destAddr(hash part)
+    SWAP        // Builder on top, `value` below
+    STGRAMS     // store `value`
+    105 PUSHINT // 1 + 4 + 4 + 64 + 32
+    STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+
+    // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+    // Remaining bits of MessageRelaxed:
+    b{1000110} STSLICECONST
+    // 10 + 0 + 0 + 1 + 1 + 0
+    // 10 - Maybe (Either StateInit ^StateInit) = true false
+    // 0 - split_depth:(Maybe (## 5)) = false
+    // 0 = special:(Maybe TickTock) = false
+    // 1 = code:(Maybe ^Cell) = true
+    // 1 = data:(Maybe ^Cell) = true
+    // 0 = library:(Maybe ^Cell) = false
+    //
+    STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+    ENDC   // finalize the message
+    // → Stack state
+    // s0: Cell
+    // s1: params.`mode`
+
+    // Group 5: Sending the message, with `mode` on top
+    SWAP
+    SENDRAWMSG
+""";
+
+(slice, int) $Slice$_fun_loadCoins(slice $self) impure asm( -> 1 0) """
+    LDVARUINT16
+""";
+
+(slice, slice) $Slice$_fun_loadAddress(slice $self) impure asm( -> 1 0) """
+    LDMSGADDR
+""";
+
+builder $Builder$_fun_storeMaybeRef(cell $cell, builder $self) impure asm """
+    STOPTREF
+""";
+
+builder $Builder$_fun_storeRef(cell $cell, builder $self) impure asm """
+    STREF
+""";
+
+builder $Builder$_fun_storeAddress(builder $self, slice $address) impure asm """
+    STSLICER
+""";
+
+slice $Int$_fun_toString(int $self) impure asm """
+    <{
+        // x
+        NEWC // x b
+        OVER // x b x
+        0 LESSINT // x b <0?
+        <{
+            // x b
+            45 PUSHINT // x b 45
+            SWAP // x 45 b
+            8 STU // x b
+            SWAP // b x
+            NEGATE // b -x
+            SWAP // -x b
+        }>CONT IF
+        // x b
+
+        SWAP // b x
+
+        <{
+            // b x
+            10 PUSHINT DIVMOD // b x/10 x%10
+            48 ADDCONST // b x/10 (x%10+48)
+            s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+        }>CONT UNTIL
+        // ... b x
+
+        DROP // ... b
+        DEPTH DEC // ... b n
+        <{ 8 STU }>CONT REPEAT // b
+    }>CONT 1 1 CALLXARGS
+    // b
+
+    ENDC CTOS // s
+""";
+
+builder $Builder$_fun_storeCoins(builder $self, int $value) impure asm """
+    STVARUINT16
+""";
+
+(slice, cell) $Slice$_fun_loadRef(slice $self) impure asm( -> 1 0) """
+    LDREF
+""";
+
+int $Slice$_fun_refs(slice $self) impure asm """
+    SREFS
+""";
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), ()) $ToncastDAO$_fun_requireOwner((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    throw_unless(132, ( equal_slices_bits(__tact_context_get_sender(), $self'owner) ));
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), ());
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), slice) $ToncastDAO$_fun_owner((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    var $fresh$ret_23 = $self'owner;
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_23);
+}
+
+;; ToncastDAO_ToncastDAO.constants.fc
+;; String " #"
+slice __gen_slice_string_afb7335c0516ef9b9097739444920be36ea6a1b276a1faf376e62320f3f68367() asm """
+    B{b5ee9c724101010100040000042023fb092189} B>boc <s PUSHSLICE
+""";
+
+;; String " "
+slice __gen_slice_string_40d98146a47dbe3bbc9c7205450b5da355c567deb3ea11d30a74c85ef592e945() asm """
+    B{b5ee9c72410101010003000002200de96161} B>boc <s PUSHSLICE
+""";
+
+;; String "Toncast staked: "
+slice __gen_slice_string_89c02009ac7ced1b6760136e4500e5f495151f52890f2259b26f1fc3025b0fe4() asm """
+    B{b5ee9c72410101010012000020546f6e63617374207374616b65643a206580061e} B>boc <s PUSHSLICE
+""";
+
+;; String " at timestamp: "
+slice __gen_slice_string_062a7448e0616e0d45c997230779a1e917840b2fba47c48c0e3b7295e9d1571a() asm """
+    B{b5ee9c7241010101001100001e2061742074696d657374616d703a2023be1809} B>boc <s PUSHSLICE
+""";
+
+;; String " in contract: "
+slice __gen_slice_string_a43354b00de26195e0be600c056379381730196e2699b014bdcf603654358a9f() asm """
+    B{b5ee9c7241010101001000001c20696e20636f6e74726163743a205bf2c8ec} B>boc <s PUSHSLICE
+""";
+
+;; String "-"
+slice __gen_slice_string_c227cf8ce099fb69efb3d0efb48634d0a465ac6c3808927d5bbccdb6bfe2b6a8() asm """
+    B{b5ee9c724101010100030000022ddea549de} B>boc <s PUSHSLICE
+""";
+
+;; String ".png"
+slice __gen_slice_string_f77599d28827b2d597cc2d68051534950148103f56f82aaf649debf92c856678() asm """
+    B{b5ee9c724101010100060000082e706e67be23437d} B>boc <s PUSHSLICE
+""";
+
+;; Cell vrBoPr64kn/p/I7AoYvH3ReJlomCWhIeq0bFo6hg0M4=
+cell __gen_cell_cell_beb0683ebeb8927fe9fc8ec0a18bc7dd17899689825a121eab46c5a3a860d0ce() asm """
+    B{b5ee9c7241021101000323000114ff00f4a413f4bcf2c80b0102016202100202cc03060201d4040500c30831c02497c138007434c0c05c6c2544d7c0fc03383e903e900c7e800c5c75c87e800c7e800c1cea6d0000b4c7e08403e29fa954882ea54c4d167c0278208405e3514654882ea58c511100fc02b80d60841657c1ef2ea4d67c02f817c12103fcbc2000113e910c1c2ebcb85360020120070f020120080a01f1503d33ffa00fa4021f001ed44d0fa00fa40fa40d4305136a1522ac705f2e2c128c2fff2e2c254344270542013541403c85004fa0258cf1601cf16ccc922c8cb0112f400f400cb00c920f9007074c8cb02ca07cbffc9d004fa40f40431fa0020d749c200f2e2c4778018c8cb055008cf1670fa0217cb6b13cc809009e8210178d4519c8cb1f19cb3f5007fa0222cf165006cf1625fa025003cf16c95005cc2391729171e25008a813a08209c9c380a014bcf2e2c504c98040fb001023c85004fa0258cf1601cf16ccc9ed540201200b0e02f73b51343e803e903e90350c0234cffe80145468017e903e9014d6f1c1551cdb5c150804d50500f214013e809633c58073c5b33248b232c044bd003d0032c0327e401c1d3232c0b281f2fff274140371c1472c7cb8b0c2be80146a2860822625a019ad822860822625a028062849e5c412440e0dd7c138c34975c2c0600c0d00705279a018a182107362d09cc8cb1f5230cb3f58fa025007cf165007cf16c9718010c8cb0524cf165006fa0215cb6a14ccc971fb0010241023007cc30023c200b08e218210d53276db708010c8cb055008cf165004fa0216cb6a12cb1f12cb3fc972fb0093356c21e203c85004fa0258cf1601cf16ccc9ed5400d73b51343e803e903e90350c01f4cffe803e900c145468549271c17cb8b049f0bffcb8b08160824c4b402805af3cb8b0e0841ef765f7b232c7c572cfd400fe8088b3c58073c5b25c60063232c14933c59c3e80b2dab33260103ec01004f214013e809633c58073c5b3327b55200083d40106b90f6a2687d007d207d206a1802698fc1080bc6a28ca9105d41083deecbef09dd0958f97162e99f98fd001809d02811e428027d012c678b00e78b6664f6aa4001ba0f605da89a1f401f481f481a861bb5c4775} B>boc PUSHREF
+""";
+
+;; Cell adq2ZAfbht0AORhkvFtSxaMM67rftsbLNkY8/CRa/uo=
+cell __gen_cell_cell_69dab66407db86dd00391864bc5b52c5a30cebbadfb6c6cb36463cfc245afeea() asm """
+    B{b5ee9c7241021101000248000114ff00f4a413f4bcf2c80b01020162020e0202ce030b020120040a03e50c8871c02497c0f83434c0c05c6c2497c0f83e903e900c7e800c5c75c87e800c7e800c1cea6d003c00816ce38556db088d148cb1c17cb865407e9035350c040d3c00f801f4c7f4cfe08417f30f45148c2eb8c08c0d8dcde0840bf2c9a894982eb8c0a0840e8e8e8e85aeb8c097c1a103fcbc2005080902b2321048103710261045025136c705f2e191fa4021f001fa40d20031fa0020d749c200f2e2c4820afaf0801ca121945315a0a1de22d70b01c300209206a19136e220c2fff2e1922194102b385be30d0293303335e30d5503f0030607007c821005138d91c8500acf16500ccf1671244a145446b0708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb001058006a27f0018210d53276db103845006d71708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb00007c3234347082108b77173504c8cb3f5005cf16102410238040708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb00008ec85005cf165005cf16c9c8cc14ccc97082107b7b7b7b04c8cb3f12cc4430128040708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb0000113e910c1c2ebcb853600201200c0d00393b513434cffe900835d27080263e9035350c1fd550380c1c165b5b5b600021013232cfd400f3c58073c5b333327b552002016a0f10000bb5f9fe004610000bb4c03e00463044d67833} B>boc PUSHREF
+""";
+
+;; Cell AQTcYgfZEWDVWmAdh7HDNo0TLZQksmrGlrLI3b34v7k=
+cell __gen_cell_cell_0104dc6207d91160d55a601d87b1c3368d132d9424b26ac696b2c8ddbdf8bfb9() asm """
+    B{b5ee9c7241021001000181000114ff00f4a413f4bcf2c80b01020162020b0202cd030602e1d10638048adf000e8698180b8d848adf07d201800e98fe99f98f6a2687d20699fea6a1828b1e382f970c8926000c7179a01699fa989ddf970c92989dd00fd006a1813881a2cf803470880d22001e42802678b09659fe66664f6aa492f82717012600171811901e001f1812f824207f9784040500a0347003d4308e378040f4966fa5208e2906a4208100fabe93f2c18fde81019321a05325bbf2f402fa00d43022544a30f00623ba9302a402de04926c21e2b3e630325023c85004cf1612cb3fccccc9ed54002401fa403003c85004cf1612cb3fccccc9ed54020120070a0201200809002d007232cffe0a33c5b25c083232c044fd003d0032c03260001b3e401d3232c084b281f2fff27420003d45af0047021f005778018c8cb0558cf165004fa0213cb6b12ccccc971fb0080201200c0f0201200d0e0007b8b5d3180029ba7a3ed44d0fa40d33fd4d4306c31f0047001f00580023bc82df6a2687d20699fea6a1818686a182c4e328de4a} B>boc PUSHREF
+""";
+
+;; ToncastDAO_ToncastDAO.storage.fc
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_constructor_code_data(cell $code, cell $data) inline {
+    return ($code, $data);
+}
+
+;;
+;; Type: Context
+;; TLB: _ bounceable:bool sender:address value:int257 raw:^slice = Context
+;;
+
+_ $Context$_get_value((int, slice, int, slice) v) inline {
+    var (v'bounceable, v'sender, v'value, v'raw) = v;
+    return v'value;
+}
+
+;;
+;; Type: MessageParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 to:address bounce:bool = MessageParameters
+;;
+
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_mode_body(slice $to, int $value, int $mode, cell $body) inline {
+    return ($mode, $body, $value, $to, true);
+}
+
+((int, cell, int, slice, int)) $MessageParameters$_constructor_to_value_body(slice $to, int $value, cell $body) inline {
+    return (0, $body, $value, $to, true);
+}
+
+;;
+;; Type: DeployParameters
+;; TLB: _ mode:int257 body:Maybe ^cell value:int257 bounce:bool init:StateInit{code:^cell,data:^cell} = DeployParameters
+;;
+
+((int, cell, int, int, (cell, cell))) $DeployParameters$_constructor_init_value_mode_body((cell, cell) $init, int $value, int $mode, cell $body) inline {
+    return ($mode, $body, $value, true, $init);
+}
+
+;;
+;; Type: DeployEpoch
+;; Header: 0x5a75ae3e
+;; TLB: deploy_epoch#5a75ae3e totalToncastStaked:coins = DeployEpoch
+;;
+
+builder $DeployEpoch$_store(builder build_0, (int) v) inline {
+    var (v'totalToncastStaked) = v;
+    build_0 = store_uint(build_0, 1517661758, 32);
+    build_0 = build_0.store_varuint16(v'totalToncastStaked);
+    return build_0;
+}
+
+cell $DeployEpoch$_store_cell((int) v, builder b) inline {
+    return $DeployEpoch$_store(b, v).end_cell();
+}
+
+((int)) $DeployEpoch$_constructor_totalToncastStaked(int $totalToncastStaked) inline {
+    return ($totalToncastStaked);
+}
+
+;;
+;; Type: PayoutStaker
+;; Header: 0x3a9b4f22
+;; TLB: payout_staker#3a9b4f22 queryId:uint64 stakerAddress:address stakerToncastAmount:coins = PayoutStaker
+;;
+
+builder $PayoutStaker$_store(builder build_0, (int, slice, int) v) inline {
+    var (v'queryId, v'stakerAddress, v'stakerToncastAmount) = v;
+    build_0 = store_uint(build_0, 983256866, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    build_0 = build_0.store_slice(v'stakerAddress);
+    build_0 = build_0.store_varuint16(v'stakerToncastAmount);
+    return build_0;
+}
+
+cell $PayoutStaker$_store_cell((int, slice, int) v, builder b) inline {
+    return $PayoutStaker$_store(b, v).end_cell();
+}
+
+((int, slice, int)) $PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount(int $queryId, slice $stakerAddress, int $stakerToncastAmount) inline {
+    return ($queryId, $stakerAddress, $stakerToncastAmount);
+}
+
+;;
+;; Type: ProcessEpochPayouts
+;; Header: 0x8d4b6e9f
+;; TLB: process_epoch_payouts#8d4b6e9f userAddress:address withdrawnAmount:coins startEpoch:uint32 endEpoch:uint32 = ProcessEpochPayouts
+;;
+
+builder $ProcessEpochPayouts$_store(builder build_0, (slice, int, int, int) v) inline {
+    var (v'userAddress, v'withdrawnAmount, v'startEpoch, v'endEpoch) = v;
+    build_0 = store_uint(build_0, 2370530975, 32);
+    build_0 = build_0.store_slice(v'userAddress);
+    build_0 = build_0.store_varuint16(v'withdrawnAmount);
+    build_0 = build_0.store_uint(v'startEpoch, 32);
+    build_0 = build_0.store_uint(v'endEpoch, 32);
+    return build_0;
+}
+
+cell $ProcessEpochPayouts$_store_cell((slice, int, int, int) v, builder b) inline {
+    return $ProcessEpochPayouts$_store(b, v).end_cell();
+}
+
+((slice, int, int, int)) $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch(slice $userAddress, int $withdrawnAmount, int $startEpoch, int $endEpoch) inline {
+    return ($userAddress, $withdrawnAmount, $startEpoch, $endEpoch);
+}
+
+;;
+;; Type: NftGetAllData
+;; Header: 0x3a3a3a3a
+;; TLB: nft_get_all_data#3a3a3a3a queryId:uint64 = NftGetAllData
+;;
+
+builder $NftGetAllData$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 976894522, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $NftGetAllData$_store_cell((int) v, builder b) inline {
+    return $NftGetAllData$_store(b, v).end_cell();
+}
+
+((int)) $NftGetAllData$_constructor_queryId(int $queryId) inline {
+    return ($queryId);
+}
+
+;;
+;; Type: StakingData
+;; TLB: _ amount:coins timestamp:uint64 daoAddress:address = StakingData
+;;
+
+((int, int, slice)) $StakingData$_constructor_amount_timestamp_daoAddress(int $amount, int $timestamp, slice $daoAddress) inline {
+    return ($amount, $timestamp, $daoAddress);
+}
+
+;;
+;; Type: DAOEpochData
+;; TLB: _ deployTime:uint64 currentRealTimeEpoch:uint32 epochDuration:uint32 currentStoredEpochNumber:uint32 totalCurrentlyStaked:coins = DAOEpochData
+;;
+
+(int, int, int, int, int) $DAOEpochData$_to_external(((int, int, int, int, int)) v) inline {
+    var (v'deployTime, v'currentRealTimeEpoch, v'epochDuration, v'currentStoredEpochNumber, v'totalCurrentlyStaked) = v; 
+    return (v'deployTime, v'currentRealTimeEpoch, v'epochDuration, v'currentStoredEpochNumber, v'totalCurrentlyStaked);
+}
+
+((int, int, int, int, int)) $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked(int $deployTime, int $currentRealTimeEpoch, int $epochDuration, int $currentStoredEpochNumber, int $totalCurrentlyStaked) inline {
+    return ($deployTime, $currentRealTimeEpoch, $epochDuration, $currentStoredEpochNumber, $totalCurrentlyStaked);
+}
+
+;;
+;; Type: DAOConfigData
+;; TLB: _ nextItemIndex:uint64 nftCollectionAddress:address jettonMasterAddress:address jettonWalletAddress:address minDepositAmount:coins nftNamePrefix:^string nftImageUrl:^string isReadyToAcceptDeposits:bool stopped:bool newDaoAddress:address = DAOConfigData
+;;
+
+(int, slice, slice, slice, int, slice, slice, int, int, slice) $DAOConfigData$_to_external(((int, slice, slice, slice, int, slice, slice, int, int, slice)) v) inline {
+    var (v'nextItemIndex, v'nftCollectionAddress, v'jettonMasterAddress, v'jettonWalletAddress, v'minDepositAmount, v'nftNamePrefix, v'nftImageUrl, v'isReadyToAcceptDeposits, v'stopped, v'newDaoAddress) = v; 
+    return (v'nextItemIndex, v'nftCollectionAddress, v'jettonMasterAddress, v'jettonWalletAddress, v'minDepositAmount, v'nftNamePrefix, v'nftImageUrl, v'isReadyToAcceptDeposits, v'stopped, v'newDaoAddress);
+}
+
+((int, slice, slice, slice, int, slice, slice, int, int, slice)) $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress(int $nextItemIndex, slice $nftCollectionAddress, slice $jettonMasterAddress, slice $jettonWalletAddress, int $minDepositAmount, slice $nftNamePrefix, slice $nftImageUrl, int $isReadyToAcceptDeposits, int $stopped, slice $newDaoAddress) inline {
+    return ($nextItemIndex, $nftCollectionAddress, $jettonMasterAddress, $jettonWalletAddress, $minDepositAmount, $nftNamePrefix, $nftImageUrl, $isReadyToAcceptDeposits, $stopped, $newDaoAddress);
+}
+
+;;
+;; Type: ToncastDAOepoch
+;; TLB: _ owner:address epochNumber:uint32 totalTonReceived:coins totalToncastStaked:coins isInitialized:bool = ToncastDAOepoch
+;;
+
+builder $ToncastDAOepoch$init$_store(builder build_0, (slice, int) v) inline {
+    var (v'owner, v'epochNumber) = v;
+    build_0 = build_0.store_slice(v'owner);
+    build_0 = build_0.store_int(v'epochNumber, 257);
+    return build_0;
+}
+
+cell $ToncastDAOepoch$_child_get_code() impure asm """
+    B{b5ee9c7201021101000357000228ff008e88f4a413f4bcf2c80bed5320e303ed43d90102020378a0030402ec3001d072d721d200d200fa4021103450666f04f86102f862ed44d0d200019efa40d31ffa00fa00d20055406c159efa40810101d7005902d101702070e206925f06e004d70d1fdd2182105a75ae3ebae3020182103a9b4f22bae302304034c87f01ca0055405045ce12cb1f01fa0201fa02ca00c9ed540a0b0157bb571ed44d0d200019efa40d31ffa00fa00d20055406c159efa40810101d7005902d101702070e2db3c6c558050201200607000a54732153370157b4a3bda89a1a400033df481a63ff401f401a400aa80d82b3df481020203ae00b205a202e040e1c5b678d8a3008015bb416fda89a1a400033df481a63ff401f401a400aa80d82b3df481020203ae00b205a202e040e1c4aa09b678d8a3009000224004821b3917f9322c000e2917f9320c101e2923070e023a822a9042082084c4b40b9923070e0019c31fa003010344135db3c6c21b3f2e1fc22c200f2e1f5f8416f24135f03820afaf080bef2e1faf8416f24135f03820afaf080a155027fc87f01ca0055405045ce12cb1f01fa0201fa02ca00c9ed540c04f4d33f31fa40fa00305056db3c20f2e1f426c200f2e1f65361bbf2e1f721c200f2e1f95162a821a9042082084c4b40bef2e1f8c86f00016f8c6d6f8c8b745706f636820238db3c248e22c821c10098802d01cb0701a301de019a7aa90ca630541220c000e63068a592cb07e4da11c9d0db3c8b72072657761726480c10100d0010f84225c705f2e08404fedb3cf8276f102282084c4b40a0bc8eb38042016f2201c993216eb396016f2259ccc9e831d0db3c103740037fc8cf8580ca00cf8440ce01fa02806acf40f400c901fb008eb731708100a0026f2201c993216eb396016f2259ccc9e831d0db3c10371240037fc8cf8580ca00cf8440ce01fa02806acf40f400c901fb00e24034100e0e0f0142c87001cb1f6f00016f8c6d6f8c01db3c6f2201c993216eb396016f2259ccc9e831100030c87f01ca0055405045ce12cb1f01fa0201fa02ca00c9ed5400b620d74a21d7499720c20022c200b18e48036f22807f22cf31ab02a105ab025155b60820c2009a20aa0215d71803ce4014de596f025341a1c20099c8016f025044a1aa028e123133c20099d430d020d74a21d749927020e2e2e85f03} B>boc PUSHREF
+""";
+
+(cell, cell) $ToncastDAOepoch$_init_child(slice $owner, int $epochNumber) inline_ref {
+    ;; Build init code cell
+
+    ;; Contract Code: ToncastDAOepoch
+    cell init_code = $ToncastDAOepoch$_child_get_code();
+
+
+    builder b = begin_cell();
+    b = b.store_int(false, 1);
+    b = $ToncastDAOepoch$init$_store(b, ($owner, $epochNumber));
+    return (init_code, b.end_cell());
+}
+
+;;
+;; Type: ToncastDAO
+;; TLB: _ owner:address stopped:bool nftCollectionAddress:address jettonMasterAddress:address minDepositAmount:coins nextItemIndex:uint64 nftNamePrefix:^string nftImageUrl:^string pendingWithdrawals:dict<address, int> pendingWithdrawalOwners:dict<address, address> collectionMetadata:^cell seq:uint32 newDaoAddress:address deployTime:uint64 epochDuration:uint32 lastProcessedEpoch:uint32 totalCurrentlyStaked:coins = ToncastDAO
+;;
+
+builder $ToncastDAO$_store(builder build_0, (slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) v) inline {
+    var (v'owner, v'stopped, v'nftCollectionAddress, v'jettonMasterAddress, v'minDepositAmount, v'nextItemIndex, v'nftNamePrefix, v'nftImageUrl, v'pendingWithdrawals, v'pendingWithdrawalOwners, v'collectionMetadata, v'seq, v'newDaoAddress, v'deployTime, v'epochDuration, v'lastProcessedEpoch, v'totalCurrentlyStaked) = v;
+    build_0 = build_0.store_slice(v'owner);
+    build_0 = build_0.store_int(v'stopped, 1);
+    build_0 = __tact_store_address_opt(build_0, v'nftCollectionAddress);
+    build_0 = build_0.store_slice(v'jettonMasterAddress);
+    build_0 = build_0.store_varuint16(v'minDepositAmount);
+    build_0 = build_0.store_uint(v'nextItemIndex, 64);
+    build_0 = build_0.store_builder_ref(begin_cell().store_slice(v'nftNamePrefix));
+    var build_1 = begin_cell();
+    build_1 = build_1.store_builder_ref(begin_cell().store_slice(v'nftImageUrl));
+    build_1 = build_1.store_dict(v'pendingWithdrawals);
+    build_1 = build_1.store_dict(v'pendingWithdrawalOwners);
+    build_1 = build_1.store_ref(v'collectionMetadata);
+    build_1 = build_1.store_uint(v'seq, 32);
+    build_1 = __tact_store_address_opt(build_1, v'newDaoAddress);
+    build_1 = build_1.store_uint(v'deployTime, 64);
+    build_1 = build_1.store_uint(v'epochDuration, 32);
+    build_1 = build_1.store_uint(v'lastProcessedEpoch, 32);
+    build_1 = build_1.store_varuint16(v'totalCurrentlyStaked);
+    build_0 = store_builder_ref(build_0, build_1);
+    return build_0;
+}
+
+(slice, ((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int))) $ToncastDAO$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    var v'stopped = sc_0~load_int(1);
+    var v'nftCollectionAddress = sc_0~__tact_load_address_opt();
+    var v'jettonMasterAddress = sc_0~load_msg_addr();
+    var v'minDepositAmount = sc_0~load_varuint16();
+    var v'nextItemIndex = sc_0~load_uint(64);
+    var v'nftNamePrefix = sc_0~load_ref().begin_parse();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'nftImageUrl = sc_1~load_ref().begin_parse();
+    var v'pendingWithdrawals = sc_1~load_dict();
+    var v'pendingWithdrawalOwners = sc_1~load_dict();
+    var v'collectionMetadata = sc_1~load_ref();
+    var v'seq = sc_1~load_uint(32);
+    var v'newDaoAddress = sc_1~__tact_load_address_opt();
+    var v'deployTime = sc_1~load_uint(64);
+    var v'epochDuration = sc_1~load_uint(32);
+    var v'lastProcessedEpoch = sc_1~load_uint(32);
+    var v'totalCurrentlyStaked = sc_1~load_varuint16();
+    return (sc_0, (v'owner, v'stopped, v'nftCollectionAddress, v'jettonMasterAddress, v'minDepositAmount, v'nextItemIndex, v'nftNamePrefix, v'nftImageUrl, v'pendingWithdrawals, v'pendingWithdrawalOwners, v'collectionMetadata, v'seq, v'newDaoAddress, v'deployTime, v'epochDuration, v'lastProcessedEpoch, v'totalCurrentlyStaked));
+}
+
+(slice, ((slice, slice, int, int, slice, slice, int, cell, int))) $ToncastDAO$init$_load(slice sc_0) inline {
+    var v'owner = sc_0~load_msg_addr();
+    var v'jettonMasterAddress = sc_0~load_msg_addr();
+    var v'minDepositAmount = sc_0~load_varuint16();
+    var v'nextItemIndex = sc_0~load_uint(64);
+    var v'nftNamePrefix = sc_0~load_ref().begin_parse();
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'nftImageUrl = sc_1~load_ref().begin_parse();
+    var v'epochDuration = sc_1~load_uint(32);
+    var v'collectionMetadata = sc_1~load_ref();
+    var v'seq = sc_1~load_uint(32);
+    return (sc_0, (v'owner, v'jettonMasterAddress, v'minDepositAmount, v'nextItemIndex, v'nftNamePrefix, v'nftImageUrl, v'epochDuration, v'collectionMetadata, v'seq));
+}
+
+(slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $ToncastDAO$_contract_load() impure inline {
+    slice $sc = get_data().begin_parse();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$ToncastDAO$_load();
+    }
+    else {
+        (slice $owner, slice $jettonMasterAddress, int $minDepositAmount, int $nextItemIndex, slice $nftNamePrefix, slice $nftImageUrl, int $epochDuration, cell $collectionMetadata, int $seq) = $sc~$ToncastDAO$init$_load();
+        $sc.end_parse();
+        return $ToncastDAO$_contract_init($owner, $jettonMasterAddress, $minDepositAmount, $nextItemIndex, $nftNamePrefix, $nftImageUrl, $epochDuration, $collectionMetadata, $seq);
+    }
+}
+
+() $ToncastDAO$_contract_store((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_int(true, 1);
+    b = $ToncastDAO$_store(b, v);
+    set_data(b.end_cell());
+}
+
+;;
+;; Contract ToncastDAO functions
+;;
+
+(slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $ToncastDAO$_contract_init(slice $owner, slice $jettonMasterAddress, int $minDepositAmount, int $nextItemIndex, slice $nftNamePrefix, slice $nftImageUrl, int $epochDuration, cell $collectionMetadata, int $seq) impure inline {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = (null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null(), null());
+    $self'owner = $owner;
+    $self'stopped = false;
+    $self'jettonMasterAddress = $jettonMasterAddress;
+    $self'minDepositAmount = $minDepositAmount;
+    $self'nextItemIndex = $nextItemIndex;
+    $self'nftNamePrefix = $nftNamePrefix;
+    $self'nftImageUrl = $nftImageUrl;
+    $self'pendingWithdrawals = null();
+    $self'pendingWithdrawalOwners = null();
+    $self'collectionMetadata = $collectionMetadata;
+    $self'seq = $seq;
+    $self'newDaoAddress = null();
+    $self'deployTime = $global_now();
+    $self'epochDuration = $epochDuration;
+    $self'lastProcessedEpoch = 0;
+    $self'totalCurrentlyStaked = 0;
+    $self'nftCollectionAddress = null();
+    return ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked);
+}
+
+(int, int, slice) $global_parseStakingData(cell $stakingCell) impure inline {
+    slice $cs = $Cell$_fun_beginParse($stakingCell);
+    return $StakingData$_constructor_amount_timestamp_daoAddress($cs~$Slice$_fun_loadCoins(), $cs~load_uint(64), $cs~$Slice$_fun_loadAddress());
+}
+
+cell $String$_fun_asMetadataCell(slice $self) impure inline {
+    var ($self) = $self;
+    return __tact_string_builder_end(__tact_string_builder_append_not_mut(__tact_string_builder_start_tail_string(), $self));
+}
+
+cell $global_composeItemMetadata(slice $name, slice $description, slice $image) impure inline {
+    cell $dict = null();
+    $dict~__tact_dict_set_uint_cell(256, 59089242681608890680090686026688704441792375738894456860693970539822503415433, $String$_fun_asMetadataCell($name));
+    $dict~__tact_dict_set_uint_cell(256, 90922719342317012409671596374183159143637506542604000676488204638996496437508, $String$_fun_asMetadataCell($description));
+    $dict~__tact_dict_set_uint_cell(256, 43884663033947008978309661017057008345326326811558777475113826163084742639165, $String$_fun_asMetadataCell($image));
+    return $Builder$_fun_endCell($Builder$_fun_storeMaybeRef($dict, store_uint($global_beginCell(), 0, 8)));
+}
+
+cell $global_buildCollectionInitData(slice $owner, cell $itemCode, cell $contentContainer) impure inline {
+    return $Builder$_fun_endCell($Builder$_fun_storeRef($itemCode, $Builder$_fun_storeRef($contentContainer, store_uint($Builder$_fun_storeAddress($global_beginCell(), $owner), 0, 64))));
+}
+
+cell $global_buildNftIndividualContent(slice $owner, slice $namePrefix, slice $baseImageUrl, int $itemIndex, int $depositAmount) impure inline {
+    tuple $name = __tact_string_builder_start_string();
+    $name~__tact_string_builder_append($namePrefix);
+    $name~__tact_string_builder_append(__gen_slice_string_afb7335c0516ef9b9097739444920be36ea6a1b276a1faf376e62320f3f68367());
+    $name~__tact_string_builder_append($Int$_fun_toString($itemIndex));
+    $name~__tact_string_builder_append(__gen_slice_string_40d98146a47dbe3bbc9c7205450b5da355c567deb3ea11d30a74c85ef592e945());
+    int $currentTime = $global_now();
+    slice $daoAddress = $global_myAddress();
+    tuple $description = __tact_string_builder_start_string();
+    $description~__tact_string_builder_append(__gen_slice_string_89c02009ac7ced1b6760136e4500e5f495151f52890f2259b26f1fc3025b0fe4());
+    $description~__tact_string_builder_append($Int$_fun_toString($depositAmount));
+    $description~__tact_string_builder_append(__gen_slice_string_062a7448e0616e0d45c997230779a1e917840b2fba47c48c0e3b7295e9d1571a());
+    $description~__tact_string_builder_append($Int$_fun_toString($currentTime));
+    $description~__tact_string_builder_append(__gen_slice_string_a43354b00de26195e0be600c056379381730196e2699b014bdcf603654358a9f());
+    $description~__tact_string_builder_append(__tact_address_to_user_friendly($daoAddress));
+    cell $stakingData = $Builder$_fun_endCell($Builder$_fun_storeAddress(store_uint($Builder$_fun_storeCoins($global_beginCell(), $depositAmount), $currentTime, 64), $daoAddress));
+    tuple $image = __tact_string_builder_start_string();
+    $image~__tact_string_builder_append($baseImageUrl);
+    $image~__tact_string_builder_append($Int$_fun_toString($depositAmount));
+    $image~__tact_string_builder_append(__gen_slice_string_c227cf8ce099fb69efb3d0efb48634d0a465ac6c3808927d5bbccdb6bfe2b6a8());
+    $image~__tact_string_builder_append($Int$_fun_toString($currentTime));
+    $image~__tact_string_builder_append(__gen_slice_string_c227cf8ce099fb69efb3d0efb48634d0a465ac6c3808927d5bbccdb6bfe2b6a8());
+    $image~__tact_string_builder_append(__tact_address_to_user_friendly($daoAddress));
+    $image~__tact_string_builder_append(__gen_slice_string_f77599d28827b2d597cc2d68051534950148103f56f82aaf649debf92c856678());
+    cell $nftContent = $global_composeItemMetadata(__tact_string_builder_end_slice($name), __tact_string_builder_end_slice($description), __tact_string_builder_end_slice($image));
+    return $Builder$_fun_endCell($Builder$_fun_storeRef($stakingData, $Builder$_fun_storeRef($nftContent, $Builder$_fun_storeAddress($global_beginCell(), $owner))));
+}
+
+cell $global_buildMintMessage(int $queryId, int $itemIndex, int $forwardAmount, cell $individualContent) impure inline {
+    return $Builder$_fun_endCell($Builder$_fun_storeRef($individualContent, $Builder$_fun_storeCoins(store_uint(store_uint(store_uint($global_beginCell(), 1, 32), $queryId, 64), $itemIndex, 64), $forwardAmount)));
+}
+
+slice $global_calculateJettonWalletAddress(slice $ownerAddress, slice $jettonMasterAddress) impure inline_ref {
+    cell $initData = $Builder$_fun_endCell($Builder$_fun_storeRef(__gen_cell_cell_beb0683ebeb8927fe9fc8ec0a18bc7dd17899689825a121eab46c5a3a860d0ce(), $Builder$_fun_storeAddress($Builder$_fun_storeAddress($Builder$_fun_storeCoins($global_beginCell(), 0), $ownerAddress), $jettonMasterAddress)));
+    var ($stateInit'code, $stateInit'data) = $StateInit$_constructor_code_data(__gen_cell_cell_beb0683ebeb8927fe9fc8ec0a18bc7dd17899689825a121eab46c5a3a860d0ce(), $initData);
+    return $global_contractAddress(($stateInit'code, $stateInit'data));
+}
+
+slice $global_calculateNftItemAddress(slice $collectionAddress, int $itemIndex) impure inline {
+    cell $initData = $Builder$_fun_endCell($Builder$_fun_storeAddress(store_uint($global_beginCell(), $itemIndex, 64), $collectionAddress));
+    var ($stateInit'code, $stateInit'data) = $StateInit$_constructor_code_data(__gen_cell_cell_69dab66407db86dd00391864bc5b52c5a30cebbadfb6c6cb36463cfc245afeea(), $initData);
+    return $global_contractAddress(($stateInit'code, $stateInit'data));
+}
+
+slice $global_calculateEpochContractAddress(int $epochNumber, slice $daoAddress) impure inline {
+    var ($epochInit'code, $epochInit'data) = $ToncastDAOepoch$_init_child($daoAddress, $epochNumber);
+    return $global_contractAddress(($epochInit'code, $epochInit'data));
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), int) $ToncastDAO$_fun_getCurrentEpochNumber((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    if (($global_now() < $self'deployTime)) {
+        var $fresh$ret_17 = 0;
+        return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_17);
+    }
+    int $timePassed = ($global_now() - $self'deployTime);
+    var $fresh$ret_18 = ($timePassed / $self'epochDuration);
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_18);
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), ()) $ToncastDAO$_fun_checkAndUpdateEpoch((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    if ($self'stopped) {
+        if ((~ null?($self'newDaoAddress))) {
+            int $balance = $global_myBalance();
+            if (($balance > 50000000)) {
+                $global_message($MessageParameters$_constructor_to_value_mode_body(__tact_not_null($self'newDaoAddress), ($balance - 50000000), 2, null()));
+            }
+        }
+        return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), ());
+    }
+    int $currentEpoch = ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)~$ToncastDAO$_fun_getCurrentEpochNumber();
+    if (($currentEpoch > $self'lastProcessedEpoch)) {
+        int $balance = $global_myBalance();
+        int $amountToSend = ($balance - 50000000);
+        if (($amountToSend > 100000000)) {
+            int $epochToFund = $self'lastProcessedEpoch;
+            var ($epochInit'code, $epochInit'data) = $ToncastDAOepoch$_init_child($global_myAddress(), $epochToFund);
+            $global_deploy($DeployParameters$_constructor_init_value_mode_body(($epochInit'code, $epochInit'data), $amountToSend, 2, $DeployEpoch$_store_cell($DeployEpoch$_constructor_totalToncastStaked($self'totalCurrentlyStaked), begin_cell())));
+        }
+        $self'lastProcessedEpoch = $currentEpoch;
+    }
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), ());
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), (int, slice, slice, slice, int, slice, slice, int, int, slice)) $ToncastDAO$_fun_getDAOConfigData((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    var $fresh$ret_19 = $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress($self'nextItemIndex, $self'nftCollectionAddress, $self'jettonMasterAddress, $global_calculateJettonWalletAddress($global_myAddress(), $self'jettonMasterAddress), $self'minDepositAmount, $self'nftNamePrefix, $self'nftImageUrl, (~ null?($self'nftCollectionAddress)), $self'stopped, $self'newDaoAddress);
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_19);
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), (int, int, int, int, int)) $ToncastDAO$_fun_getDAOEpochData((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    var $fresh$ret_20 = $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked($self'deployTime, ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)~$ToncastDAO$_fun_getCurrentEpochNumber(), $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked);
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_20);
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), slice) $ToncastDAO$_fun_getEpochContractAddress((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self, int $epochNumber) impure inline_ref {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    var $fresh$ret_21 = $global_calculateEpochContractAddress($epochNumber, $global_myAddress());
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_21);
+}
+
+((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int), cell) $ToncastDAO$_fun_getCollectionMetadata((slice, int, slice, slice, int, int, slice, slice, cell, cell, cell, int, slice, int, int, int, int) $self) impure inline_ref {
+    var (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)) = $self;
+    var $fresh$ret_22 = $self'collectionMetadata;
+    return (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked), $fresh$ret_22);
+}
+
+;;
+;; Get methods of a Contract ToncastDAO
+;;
+
+_ %getDAOConfigData() method_id(104592) {
+    var self = $ToncastDAO$_contract_load();
+    var res = self~$ToncastDAO$_fun_getDAOConfigData();
+    return $DAOConfigData$_to_external(res);
+}
+
+_ %getDAOEpochData() method_id(92403) {
+    var self = $ToncastDAO$_contract_load();
+    var res = self~$ToncastDAO$_fun_getDAOEpochData();
+    return $DAOEpochData$_to_external(res);
+}
+
+_ %getEpochContractAddress(int $epochNumber) method_id(116010) {
+    int $epochNumber = $epochNumber;
+    var self = $ToncastDAO$_contract_load();
+    var res = self~$ToncastDAO$_fun_getEpochContractAddress($epochNumber);
+    return res;
+}
+
+_ %getCollectionMetadata() method_id(84523) {
+    var self = $ToncastDAO$_contract_load();
+    var res = self~$ToncastDAO$_fun_getCollectionMetadata();
+    return res;
+}
+
+_ %owner() method_id(83229) {
+    var self = $ToncastDAO$_contract_load();
+    var res = self~$ToncastDAO$_fun_owner();
+    return res;
+}
+
+;;
+;; Routing of a Contract ToncastDAO
+;;
+
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    cs~skip_bits(2);
+    var msg_bounceable = cs~load_int(1);
+    var msg_bounced = cs~load_int(1);
+    slice msg_sender_addr = cs~load_msg_addr();
+    __tact_context = (msg_bounceable, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked) = $ToncastDAO$_contract_load();
+    
+    ;; Handle bounced messages
+    if (msg_bounced) { return (); }
+    int op = 0;
+    int in_msg_length = slice_bits(in_msg);
+    if (in_msg_length >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    ;; Receive JettonTransferNotification message
+    if (op == 0x7362d09c) {
+        in_msg~skip_bits(32);
+        var $msg'queryId = in_msg~load_uint(64);
+        var $msg'amount = in_msg~load_varuint16();
+        var $msg'sender = in_msg~load_msg_addr();
+        var $msg'forwardPayload = in_msg;
+        slice $expectedJettonWallet = $global_calculateJettonWalletAddress($global_myAddress(), $self'jettonMasterAddress);
+        throw_unless(401, ( equal_slices_bits(__tact_context_get_sender(), $expectedJettonWallet) ));
+        throw_unless(402, ($msg'amount >= $self'minDepositAmount));
+        throw_unless(403, ($Context$_get_value(__tact_context_get()) >= 200000000));
+        throw_unless(410, (~ null?($self'nftCollectionAddress)));
+        $self'totalCurrentlyStaked = $self'totalCurrentlyStaked + $msg'amount;
+        cell $individualContent = $global_buildNftIndividualContent($msg'sender, $self'nftNamePrefix, $self'nftImageUrl, $self'nextItemIndex, $msg'amount);
+        cell $mintMessage = $global_buildMintMessage($msg'queryId, $self'nextItemIndex, 50000000, $individualContent);
+        $global_message($MessageParameters$_constructor_to_value_body(__tact_not_null($self'nftCollectionAddress), 60000000, $mintMessage));
+        $self'nextItemIndex = $self'nextItemIndex + 1;
+        ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)~$ToncastDAO$_fun_checkAndUpdateEpoch();
+        $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+        return ();
+    }
+    
+    ;; Receive NftTransferNotification message
+    if (op == 0x5138d91) {
+        in_msg~skip_bits(32);
+        var $msg'queryId = in_msg~load_uint(64);
+        var $msg'prevOwner = in_msg~load_msg_addr();
+        var $msg'forwardPayload = in_msg;
+        throw_unless(410, (~ null?($self'nftCollectionAddress)));
+        slice $nftAddress = __tact_context_get_sender();
+        $self'pendingWithdrawals~__tact_dict_set_slice_int(267, $nftAddress, $msg'queryId, 257);
+        $self'pendingWithdrawalOwners~__tact_dict_set_slice_slice(267, $nftAddress, $msg'prevOwner);
+        int $incoming = $Context$_get_value(__tact_context_get());
+        int $commission = ($incoming / 10);
+        int $availableForProcessing = ($incoming - $commission);
+        $global_message($MessageParameters$_constructor_to_value_mode_body($nftAddress, $availableForProcessing, 1, $NftGetAllData$_store_cell($NftGetAllData$_constructor_queryId($msg'queryId), begin_cell())));
+        $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+        return ();
+    }
+    
+    ;; Receive NftReportAllData message
+    if (op == 0x7b7b7b7b) {
+        in_msg~skip_bits(32);
+        var $msg'queryId = in_msg~load_uint(64);
+        var $msg'index = in_msg~load_uint(64);
+        var $msg'data = in_msg~load_ref();
+        slice $nftAddress = __tact_context_get_sender();
+        int $queryId = __tact_dict_get_slice_int($self'pendingWithdrawals, 267, $nftAddress, 257);
+        throw_unless(411, (~ null?($queryId)));
+        slice $originalOwner = __tact_dict_get_slice_slice($self'pendingWithdrawalOwners, 267, $nftAddress);
+        throw_unless(411, (~ null?($originalOwner)));
+        throw_unless(412, (__tact_not_null($queryId) == $msg'queryId));
+        slice $dataSlice = $Cell$_fun_beginParse($msg'data);
+        throw_unless(419, ($Slice$_fun_refs($dataSlice) >= 2));
+        cell $addrCell = $dataSlice~$Slice$_fun_loadRef();
+        slice $addrSlice = $Cell$_fun_beginParse($addrCell);
+        slice $collection = $addrSlice~$Slice$_fun_loadAddress();
+        slice $owner = $addrSlice~$Slice$_fun_loadAddress();
+        cell $stakingDataCell = $dataSlice~$Slice$_fun_loadRef();
+        throw_unless(413, ( equal_slices_bits($collection, __tact_not_null($self'nftCollectionAddress)) ));
+        slice $expectedNftAddress = $global_calculateNftItemAddress(__tact_not_null($self'nftCollectionAddress), $msg'index);
+        throw_unless(418, ( equal_slices_bits($nftAddress, $expectedNftAddress) ));
+        throw_unless(414, ( equal_slices_bits($owner, $global_myAddress()) ));
+        var ($stakingData'amount, $stakingData'timestamp, $stakingData'daoAddress) = $global_parseStakingData($stakingDataCell);
+        throw_unless(417, ( equal_slices_bits($stakingData'daoAddress, $global_myAddress()) ));
+        $self'pendingWithdrawals~__tact_dict_delete(267, $nftAddress);
+        $self'pendingWithdrawalOwners~__tact_dict_delete(267, $nftAddress);
+        $self'totalCurrentlyStaked = $self'totalCurrentlyStaked - $stakingData'amount;
+        int $afterCommission = ($Context$_get_value(__tact_context_get()) - 10000000);
+        int $timeSinceDeployment = ($stakingData'timestamp - $self'deployTime);
+        int $stakingEpoch = ($timeSinceDeployment / $self'epochDuration);
+        int $firstCompleteEpoch = (($stakingEpoch == 0) ? 0 : ($stakingEpoch + 1));
+        int $lastCompleteEpoch = (($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)~$ToncastDAO$_fun_getCurrentEpochNumber() - 1);
+        int $epochProcessingFunds = 0;
+        if (($lastCompleteEpoch >= $firstCompleteEpoch)) {
+            int $epochsToProcess = (($lastCompleteEpoch - $firstCompleteEpoch) + 1);
+            int $batchCount = (($epochsToProcess + 99) / 100);
+            $epochProcessingFunds = ((10000000 * $epochsToProcess) + (10000000 * $batchCount));
+        }
+        int $jettonTransferFunds = ($afterCommission - $epochProcessingFunds);
+        slice $jettonWalletAddress = $global_calculateJettonWalletAddress($global_myAddress(), $self'jettonMasterAddress);
+        cell $transferMessage = $Builder$_fun_endCell($Builder$_fun_storeMaybeRef(null(), $Builder$_fun_storeCoins($Builder$_fun_storeMaybeRef(null(), $Builder$_fun_storeAddress($Builder$_fun_storeAddress($Builder$_fun_storeCoins(store_uint(store_uint($global_beginCell(), 260734629, 32), $msg'queryId, 64), $stakingData'amount), __tact_not_null($originalOwner)), __tact_not_null($originalOwner))), (($jettonTransferFunds * 85) / 100))));
+        $global_message($MessageParameters$_constructor_to_value_mode_body($jettonWalletAddress, $jettonTransferFunds, 2, $transferMessage));
+        if (($epochProcessingFunds > 0)) {
+            $global_message($MessageParameters$_constructor_to_value_mode_body($global_myAddress(), $epochProcessingFunds, 1, $ProcessEpochPayouts$_store_cell($ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch(__tact_not_null($originalOwner), $stakingData'amount, $firstCompleteEpoch, $lastCompleteEpoch), begin_cell())));
+        }
+        $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+        return ();
+    }
+    
+    ;; Receive ProcessEpochPayouts message
+    if (op == 0x8d4b6e9f) {
+        in_msg~skip_bits(32);
+        var $msg'userAddress = in_msg~load_msg_addr();
+        var $msg'withdrawnAmount = in_msg~load_varuint16();
+        var $msg'startEpoch = in_msg~load_uint(32);
+        var $msg'endEpoch = in_msg~load_uint(32);
+        throw_unless(430, ( equal_slices_bits(__tact_context_get_sender(), $global_myAddress()) ));
+        int $batchSize = 100;
+        int $currentBatchEnd = $global_min((($msg'startEpoch + $batchSize) - 1), $msg'endEpoch);
+        int $epochNum = $msg'startEpoch;
+        while (($epochNum <= $currentBatchEnd)) {
+            slice $epochAddress = $global_calculateEpochContractAddress($epochNum, $global_myAddress());
+            $global_message($MessageParameters$_constructor_to_value_mode_body($epochAddress, 10000000, 2, $PayoutStaker$_store_cell($PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount(0, $msg'userAddress, $msg'withdrawnAmount), begin_cell())));
+            $epochNum = $epochNum + 1;
+        }
+        if (($currentBatchEnd < $msg'endEpoch)) {
+            $global_message($MessageParameters$_constructor_to_value_mode_body($global_myAddress(), 0, 66, $ProcessEpochPayouts$_store_cell($ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch($msg'userAddress, $msg'withdrawnAmount, ($currentBatchEnd + 1), $msg'endEpoch), begin_cell())));
+        }
+        $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+        return ();
+    }
+    
+    ;; Receive Deploy message
+    if (op == 0x946a98b6) {
+        in_msg~skip_bits(32);
+        var $deploy'queryId = in_msg~load_uint(64);
+        throw_unless(409, null?($self'nftCollectionAddress));
+        int $incoming = $Context$_get_value(__tact_context_get());
+        int $reserve = ($incoming / 10);
+        cell $collectionContentContainer = $Builder$_fun_endCell($Builder$_fun_storeRef($Builder$_fun_endCell($global_beginCell()), $Builder$_fun_storeRef($self'collectionMetadata, $global_beginCell())));
+        cell $initData = $global_buildCollectionInitData($global_myAddress(), __gen_cell_cell_69dab66407db86dd00391864bc5b52c5a30cebbadfb6c6cb36463cfc245afeea(), $collectionContentContainer);
+        var ($stateInit'code, $stateInit'data) = $StateInit$_constructor_code_data(__gen_cell_cell_0104dc6207d91160d55a601d87b1c3368d132d9424b26ac696b2c8ddbdf8bfb9(), $initData);
+        slice $expectedAddress = $global_contractAddress(($stateInit'code, $stateInit'data));
+        $global_deploy($DeployParameters$_constructor_init_value_mode_body(($stateInit'code, $stateInit'data), ($incoming - $reserve), 1, null()));
+        $self'nftCollectionAddress = $expectedAddress;
+        $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+        return ();
+    }
+    
+    ;; Receive StopAndRedirect message
+    if (op == 0x53544f50) {
+        in_msg~skip_bits(32);
+        var $msg'newDaoAddress = in_msg~load_msg_addr();
+        ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)~$ToncastDAO$_fun_requireOwner();
+        $self'stopped = true;
+        $self'newDaoAddress = $msg'newDaoAddress;
+        int $balance = $global_myBalance();
+        if (($balance > 50000000)) {
+            $global_message($MessageParameters$_constructor_to_value_mode_body($msg'newDaoAddress, ($balance - 50000000), 2, null()));
+        }
+        $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+        return ();
+    }
+    
+    ;; Receiver fallback
+    slice $msg = in_msg;
+    ($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked)~$ToncastDAO$_fun_checkAndUpdateEpoch();
+    $ToncastDAO$_contract_store(($self'owner, $self'stopped, $self'nftCollectionAddress, $self'jettonMasterAddress, $self'minDepositAmount, $self'nextItemIndex, $self'nftNamePrefix, $self'nftImageUrl, $self'pendingWithdrawals, $self'pendingWithdrawalOwners, $self'collectionMetadata, $self'seq, $self'newDaoAddress, $self'deployTime, $self'epochDuration, $self'lastProcessedEpoch, $self'totalCurrentlyStaked));
+}
+
+
+() __tact_selector_hack_asm() impure asm """
+@atend @ 1 {
+        execute current@ context@ current!
+        {
+            // The core idea of this function is to save gas by avoiding unnecessary dict jump, when recv_internal/recv_external is called
+            // We want to extract recv_internal/recv_external from the dict and select needed function
+            // not by jumping to the needed function by it's index, but by using usual IF statements.
+
+            }END> b> // Close previous builder, now we have a cell of previous code on top of the stack
+
+            <{ // Start of the new code builder
+                SETCP0
+                // Swap the new code builder with the previous code, now we have previous code on top of the stack
+                swap
+                // Transform cell to slice and load first ref from the previous code, now we have the dict on top of the stack
+                <s ref@
+
+                // Extract the recv_internal from the dict
+                dup 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot
+                swap
+
+                // Delete the recv_internal from the dict
+                0 swap @procdictkeylen idict- drop
+                // Delete the recv_external from the dict (it's okay if it's not there)
+                -1 swap @procdictkeylen idict- drop
+                // Delete the __tact_selector_hack from the dict
+                65535 swap @procdictkeylen idict- drop
+
+                // Bring the code builder from the bottom of the stack
+                // because if recv_external extraction is optional, and the number of elements on the stack is not fixed
+                depth 1- roll
+                // Swap with the dict from which we extracted recv_internal and (maybe) recv_external
+                swap
+
+                // Check if the dict is empty
+                dup null?
+                // Store a copy of this flag in the bottom of the stack
+                dup depth 1- -roll
+                {
+                    // If the dict is empty, just drop it (it will be null if it's empty)
+                    drop
+                }
+                {
+                    // If the dict is not empty, prepare continuation to be stored in c3
+                    <{
+                        // Save this dict as first ref in this continuation, it will be pushed in runtime by DICTPUSHCONST
+                        swap @procdictkeylen DICTPUSHCONST
+                        // Jump to the needed function by it's index
+                        DICTIGETJMPZ
+                        // If such key is not found, throw 11 along with the key as an argument
+                        11 THROWARG
+                    }> PUSHCONT
+                    // Store the continuation in c3
+                    c3 POP
+                } cond
+
+                // Function id is on top of the (runtime) stack
+                DUP IFNOTJMP:<{
+                    // place recv_internal here
+                    DROP swap @addop
+                }>
+
+                // Bring back the flag, indicating if the dict is empty or not from the bottom of the stack
+                depth 1- roll
+                {
+                    // If the dict is empty, throw 11
+                    11 THROWARG
+                }
+                {
+                    // If the dict is not empty, jump to continuation from c3
+                    c3 PUSH JMPX
+                } cond
+            }> b>
+        } : }END>c
+        current@ context! current!
+    } does @atend !
+""";
+
+() __tact_selector_hack() method_id(65535) {
+    return __tact_selector_hack_asm();
+}

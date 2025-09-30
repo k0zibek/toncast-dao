@@ -1,0 +1,533 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `/Users/egorzudin/Toncast/toncast-dao/build/ToncastDAOepoch/ToncastDAOepoch_ToncastDAOepoch.fc` 
+PROGRAM{
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_string_builder_start
+  DECLPROC __tact_string_builder_start_comment
+  DECLPROC __tact_string_builder_start_string
+  DECLPROC __tact_string_builder_end
+  DECLPROC __tact_string_builder_end_slice
+  DECLPROC __tact_string_builder_append
+  DECLPROC $ToncastDAOepoch$_store
+  DECLPROC $ToncastDAOepoch$_load
+  DECLPROC $Context$_get_value
+  DECLPROC $EpochData$_to_external
+  DECLPROC $ToncastDAOepoch$init$_load
+  DECLPROC $ToncastDAOepoch$_contract_init
+  DECLPROC $ToncastDAOepoch$_contract_load
+  DECLPROC $ToncastDAOepoch$_contract_store
+  DECLPROC $String$_fun_asComment
+  DECLPROC $EpochData$_constructor_epochNumber_totalTonReceived_totalToncastStaked_isInitialized_owner
+  DECLPROC $ToncastDAOepoch$_fun_getEpochData
+  DECLPROC $ToncastDAOepoch$_fun_calculateStakerReward
+  DECLPROC $ToncastDAOepoch$_fun_requireOwner
+  DECLPROC $ToncastDAOepoch$_fun_owner
+  DECLPROC $MessageParameters$_constructor_to_value_mode_body
+  79217 DECLMETHOD %getEpochData
+  90295 DECLMETHOD %calculateStakerReward
+  83229 DECLMETHOD %owner
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_string_builder_start PROCINLINE:<{
+    NIL
+    SWAP
+    TPUSH
+    PUSHNULL
+    TPUSH
+  }>
+  __tact_string_builder_start_comment PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    32 STU
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_start_string PROCINLINE:<{
+    NEWC
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_end PROCINLINE:<{
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
+  }>
+  __tact_string_builder_end_slice PROCINLINE:<{
+    __tact_string_builder_end INLINECALLDICT
+    CTOS
+  }>
+  __tact_string_builder_append PROCREF:<{
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s0 s3 XCHG
+        STSLICE
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
+  }>
+  $ToncastDAOepoch$_store PROCINLINE:<{
+    s4 s5 XCHG2
+    STSLICE
+    s1 s2 XCHG
+    32 STU
+    SWAP
+    STVARUINT16
+    SWAP
+    STVARUINT16
+    1 STI
+  }>
+  $ToncastDAOepoch$_load PROCINLINE:<{
+    LDMSGADDR
+    32 LDU
+    LDVARUINT16
+    LDVARUINT16
+    1 LDI
+    5 -ROLL
+  }>
+  $Context$_get_value PROCINLINE:<{
+    s1 s3 XCHG
+    3 BLKDROP
+  }>
+  $EpochData$_to_external PROCINLINE:<{
+  }>
+  $ToncastDAOepoch$init$_load PROCINLINE:<{
+    LDMSGADDR
+    257 PUSHINT
+    LDIX
+    -ROT
+  }>
+  $ToncastDAOepoch$_contract_init PROCINLINE:<{
+    0 PUSHINT
+    DUP
+    FALSE
+  }>
+  $ToncastDAOepoch$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $ToncastDAOepoch$_load INLINECALLDICT
+      1 5 BLKDROP2
+    }>ELSE<{
+      $ToncastDAOepoch$init$_load INLINECALLDICT
+      s0 s2 XCHG
+      ENDS
+      SWAP
+      $ToncastDAOepoch$_contract_init INLINECALLDICT
+    }>
+  }>
+  $ToncastDAOepoch$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    5 -ROLL
+    $ToncastDAOepoch$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $String$_fun_asComment PROCREF:<{
+    __tact_string_builder_start_comment INLINECALLDICT
+    SWAP
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $EpochData$_constructor_epochNumber_totalTonReceived_totalToncastStaked_isInitialized_owner PROCINLINE:<{
+  }>
+  $ToncastDAOepoch$_fun_getEpochData PROCREF:<{
+    s3 s2 s1 PUSH3
+    s3 s7 PUSH2
+    $EpochData$_constructor_epochNumber_totalTonReceived_totalToncastStaked_isInitialized_owner INLINECALLDICT
+  }>
+  $ToncastDAOepoch$_fun_calculateStakerReward PROCREF:<{
+    OVER
+    NOT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s2 PUSH
+      0 EQINT
+    }>
+    IF:<{
+      TRUE
+    }>ELSE<{
+      DUP
+      1 LESSINT
+    }>
+    IFJMP:<{
+      DROP
+      0 PUSHINT
+    }>
+    s3 PUSH
+    MUL
+    s2 PUSH
+    DIV
+    DUP
+    5000000 PUSHINT
+    LESS
+    IFJMP:<{
+      DROP
+      0 PUSHINT
+    }>
+  }>
+  $ToncastDAOepoch$_fun_requireOwner PROCREF:<{
+    __tact_context_get_sender INLINECALLDICT
+    s5 PUSH
+    SDEQ
+    132 THROWIFNOT
+  }>
+  $ToncastDAOepoch$_fun_owner PROCREF:<{
+    s4 PUSH
+  }>
+  $MessageParameters$_constructor_to_value_mode_body PROCINLINE:<{
+    s0 s0 s3 XCHG3
+    TRUE
+  }>
+  %getEpochData PROC:<{
+    $ToncastDAOepoch$_contract_load INLINECALLDICT
+    $ToncastDAOepoch$_fun_getEpochData INLINECALLDICT
+    5 5 BLKDROP2
+    $EpochData$_to_external INLINECALLDICT
+  }>
+  %calculateStakerReward PROC:<{
+    $ToncastDAOepoch$_contract_load INLINECALLDICT
+    5 ROLL
+    $ToncastDAOepoch$_fun_calculateStakerReward INLINECALLDICT
+    5 1 BLKDROP2
+  }>
+  %owner PROC:<{
+    $ToncastDAOepoch$_contract_load INLINECALLDICT
+    $ToncastDAOepoch$_fun_owner INLINECALLDICT
+    5 1 BLKDROP2
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ToncastDAOepoch$_contract_load INLINECALLDICT
+    s0 s6 XCHG
+    IFJMP:<{
+      6 BLKDROP
+    }>
+    s0 s4 XCHG
+    32 LDUQ IFNOTRET
+    OVER
+    1517661758 PUSHINT
+    EQUAL
+    IFJMP:<{
+      NIP
+      LDVARUINT16
+      DROP
+      s3 s4 XCHG
+      s1 s3 s5 XCHG3
+      $ToncastDAOepoch$_fun_requireOwner INLINECALLDICT
+      2 1 BLKDROP2
+      NOT
+      508 THROWIFNOT
+      s2 PUSH
+      0 GTINT
+      501 THROWIFNOT
+      __tact_context_get INLINECALLDICT
+      $Context$_get_value INLINECALLDICT
+      50000000 PUSHINT
+      GEQ
+      506 THROWIFNOT
+      __tact_context_get INLINECALLDICT
+      $Context$_get_value INLINECALLDICT
+      50000000 PUSHINT
+      SUB
+      3 ROLL
+      TRUE
+      $ToncastDAOepoch$_contract_store INLINECALLDICT
+    }>
+    SWAP
+    983256866 PUSHINT
+    EQUAL
+    IFJMP:<{
+      64 LDU
+      NIP
+      LDMSGADDR
+      LDVARUINT16
+      DROP
+      s5 s6 XCHG2
+      $ToncastDAOepoch$_fun_requireOwner INLINECALLDICT
+      DUP
+      500 THROWIFNOT
+      s6 PUSH
+      0 GTINT
+      502 THROWIFNOT
+      s6 s1 PUSH2
+      LEQ
+      503 THROWIFNOT
+      OVER
+      0 GTINT
+      505 THROWIFNOT
+      s6 s2 XCPU
+      MUL
+      OVER
+      DIV
+      DUP
+      5000000 PUSHINT
+      GEQ
+      504 THROWIFNOT
+      __tact_string_builder_start_string INLINECALLDICT
+          B{b5ee9c7241010101000900000e45706f63682023d3f7d9df} B>boc <s PUSHSLICE
+      __tact_string_builder_append INLINECALLDICT
+      s4 PUSH
+          <{
+              // x
+              NEWC // x b
+              OVER // x b x
+              0 LESSINT // x b <0?
+              <{
+                  // x b
+                  45 PUSHINT // x b 45
+                  SWAP // x 45 b
+                  8 STU // x b
+                  SWAP // b x
+                  NEGATE // b -x
+                  SWAP // -x b
+              }>CONT IF
+              // x b
+              SWAP // b x
+              <{
+                  // b x
+                  10 PUSHINT DIVMOD // b x/10 x%10
+                  48 ADDCONST // b x/10 (x%10+48)
+                  s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+              }>CONT UNTIL
+              // ... b x
+              DROP // ... b
+              DEPTH DEC // ... b n
+              <{ 8 STU }>CONT REPEAT // b
+          }>CONT 1 1 CALLXARGS
+          // b
+          ENDC CTOS // s
+      __tact_string_builder_append INLINECALLDICT
+          B{b5ee9c7241010101000900000e207265776172644ebc6f46} B>boc <s PUSHSLICE
+      __tact_string_builder_append INLINECALLDICT
+          BALANCE FIRST
+      s2 PUSH
+      5000000 PUSHINT
+      ADD
+      GREATER
+      IF:<{
+        66 PUSHINT
+        SWAP
+        __tact_string_builder_end_slice INLINECALLDICT
+        $String$_fun_asComment INLINECALLDICT
+        s3 s7 XCHG
+        $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `body`
+            // s2: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+      }>ELSE<{
+        NIP
+        0 PUSHINT
+        160 PUSHINT
+        s0 s2 XCHG
+        __tact_string_builder_end_slice INLINECALLDICT
+        $String$_fun_asComment INLINECALLDICT
+        s3 s7 XCHG
+        s1 s2 XCHG
+        $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `body`
+            // s2: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+      }>
+      s0 s3 s4 XCHG3
+      $ToncastDAOepoch$_contract_store INLINECALLDICT
+    }>
+    DROP
+    s0 s3 s4 XCHG3
+    $ToncastDAOepoch$_contract_store INLINECALLDICT
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+            execute current@ context@ current!
+            {
+                // The core idea of this function is to save gas by avoiding unnecessary dict jump, when recv_internal/recv_external is called
+                // We want to extract recv_internal/recv_external from the dict and select needed function
+                // not by jumping to the needed function by it's index, but by using usual IF statements.
+                }END> b> // Close previous builder, now we have a cell of previous code on top of the stack
+                <{ // Start of the new code builder
+                    SETCP0
+                    // Swap the new code builder with the previous code, now we have previous code on top of the stack
+                    swap
+                    // Transform cell to slice and load first ref from the previous code, now we have the dict on top of the stack
+                    <s ref@
+                    // Extract the recv_internal from the dict
+                    dup 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot
+                    swap
+                    // Delete the recv_internal from the dict
+                    0 swap @procdictkeylen idict- drop
+                    // Delete the recv_external from the dict (it's okay if it's not there)
+                    -1 swap @procdictkeylen idict- drop
+                    // Delete the __tact_selector_hack from the dict
+                    65535 swap @procdictkeylen idict- drop
+                    // Bring the code builder from the bottom of the stack
+                    // because if recv_external extraction is optional, and the number of elements on the stack is not fixed
+                    depth 1- roll
+                    // Swap with the dict from which we extracted recv_internal and (maybe) recv_external
+                    swap
+                    // Check if the dict is empty
+                    dup null?
+                    // Store a copy of this flag in the bottom of the stack
+                    dup depth 1- -roll
+                    {
+                        // If the dict is empty, just drop it (it will be null if it's empty)
+                        drop
+                    }
+                    {
+                        // If the dict is not empty, prepare continuation to be stored in c3
+                        <{
+                            // Save this dict as first ref in this continuation, it will be pushed in runtime by DICTPUSHCONST
+                            swap @procdictkeylen DICTPUSHCONST
+                            // Jump to the needed function by it's index
+                            DICTIGETJMPZ
+                            // If such key is not found, throw 11 along with the key as an argument
+                            11 THROWARG
+                        }> PUSHCONT
+                        // Store the continuation in c3
+                        c3 POP
+                    } cond
+                    // Function id is on top of the (runtime) stack
+                    DUP IFNOTJMP:<{
+                        // place recv_internal here
+                        DROP swap @addop
+                    }>
+                    // Bring back the flag, indicating if the dict is empty or not from the bottom of the stack
+                    depth 1- roll
+                    {
+                        // If the dict is empty, throw 11
+                        11 THROWARG
+                    }
+                    {
+                        // If the dict is not empty, jump to continuation from c3
+                        c3 PUSH JMPX
+                    } cond
+                }> b>
+            } : }END>c
+            current@ context! current!
+        } does @atend !
+  }>
+}END>c

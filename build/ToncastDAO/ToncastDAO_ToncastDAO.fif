@@ -1,0 +1,2114 @@
+// automatically generated from `@stdlib/std/stdlib.fc` `/Users/egorzudin/Toncast/toncast-dao/build/ToncastDAO/ToncastDAO_ToncastDAO.fc` 
+PROGRAM{
+  DECLPROC __tact_store_address_opt
+  DECLPROC __tact_not_null
+  DECLPROC __tact_crc16
+  DECLPROC __tact_base64_encode
+  DECLPROC __tact_address_to_user_friendly
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_string_builder_start
+  DECLPROC __tact_string_builder_start_tail_string
+  DECLPROC __tact_string_builder_start_string
+  DECLPROC __tact_string_builder_end
+  DECLPROC __tact_string_builder_end_slice
+  DECLPROC __tact_string_builder_append
+  DECLPROC __tact_string_builder_append_not_mut
+  DECLPROC __tact_dict_get_slice_slice
+  DECLPROC __tact_dict_set_slice_slice
+  DECLPROC __tact_dict_get_slice_int
+  DECLPROC __tact_dict_set_slice_int
+  DECLPROC __tact_dict_set_uint_cell
+  DECLPROC $DeployEpoch$_store
+  DECLPROC $DeployEpoch$_store_cell
+  DECLPROC $PayoutStaker$_store
+  DECLPROC $PayoutStaker$_store_cell
+  DECLPROC $ProcessEpochPayouts$_store
+  DECLPROC $ProcessEpochPayouts$_store_cell
+  DECLPROC $NftGetAllData$_store
+  DECLPROC $NftGetAllData$_store_cell
+  DECLPROC $ToncastDAO$_store
+  DECLPROC $ToncastDAO$_load
+  DECLPROC $Context$_get_value
+  DECLPROC $DAOEpochData$_to_external
+  DECLPROC $DAOConfigData$_to_external
+  DECLPROC $ToncastDAOepoch$init$_store
+  DECLPROC $ToncastDAO$init$_load
+  DECLPROC $ToncastDAO$_contract_init
+  DECLPROC $ToncastDAO$_contract_load
+  DECLPROC $ToncastDAO$_contract_store
+  DECLPROC $Cell$_fun_asSlice
+  DECLPROC $global_newAddress
+  DECLPROC $global_contractAddressExt
+  DECLPROC $global_contractAddress
+  DECLPROC $StakingData$_constructor_amount_timestamp_daoAddress
+  DECLPROC $global_parseStakingData
+  DECLPROC $String$_fun_asMetadataCell
+  DECLPROC $global_composeItemMetadata
+  DECLPROC $global_buildCollectionInitData
+  DECLPROC $global_buildNftIndividualContent
+  DECLPROC $global_buildMintMessage
+  DECLPROC $StateInit$_constructor_code_data
+  DECLPROC $global_calculateJettonWalletAddress
+  DECLPROC $global_calculateNftItemAddress
+  DECLPROC $ToncastDAOepoch$_init_child
+  DECLPROC $global_calculateEpochContractAddress
+  DECLPROC $ToncastDAO$_fun_getCurrentEpochNumber
+  DECLPROC $MessageParameters$_constructor_to_value_mode_body
+  DECLPROC $DeployParameters$_constructor_init_value_mode_body
+  DECLPROC $DeployEpoch$_constructor_totalToncastStaked
+  DECLPROC $ToncastDAO$_fun_checkAndUpdateEpoch
+  DECLPROC $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress
+  DECLPROC $ToncastDAO$_fun_getDAOConfigData
+  DECLPROC $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked
+  DECLPROC $ToncastDAO$_fun_getDAOEpochData
+  DECLPROC $ToncastDAO$_fun_getEpochContractAddress
+  DECLPROC $ToncastDAO$_fun_getCollectionMetadata
+  DECLPROC $ToncastDAO$_fun_requireOwner
+  DECLPROC $ToncastDAO$_fun_owner
+  DECLPROC $MessageParameters$_constructor_to_value_body
+  DECLPROC $NftGetAllData$_constructor_queryId
+  DECLPROC $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch
+  DECLPROC $PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount
+  104592 DECLMETHOD %getDAOConfigData
+  92403 DECLMETHOD %getDAOEpochData
+  116010 DECLMETHOD %getEpochContractAddress
+  84523 DECLMETHOD %getCollectionMetadata
+  83229 DECLMETHOD %owner
+  DECLPROC recv_internal
+  65535 DECLMETHOD __tact_selector_hack
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_child_contract_codes
+  DECLGLOBVAR __tact_randomized
+  __tact_store_address_opt PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      b{00} STSLICECONST
+    }>ELSE<{
+      SWAP
+      STSLICE
+    }>
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_crc16 PROCREF:<{
+    NEWC
+    STSLICE
+    x{0000} PUSHSLICE
+    SWAP
+    STSLICE
+    ENDC
+    CTOS
+    0 PUSHINT
+    WHILE:<{
+      OVER
+      SDEMPTY
+      NOT
+    }>DO<{
+      SWAP
+      8 LDU
+      7 PUSHPOW2
+      WHILE:<{
+        DUP
+        0 GTINT
+      }>DO<{
+        s0 s3 XCHG
+        1 LSHIFT#
+        s2 s3 PUSH2
+        AND
+        IF:<{
+          INC
+        }>
+        s0 s3 XCHG
+        1 RSHIFT#
+        s3 PUSH
+        16 PUSHPOW2DEC
+        GREATER
+        IF:<{
+          s0 s3 XCHG
+          16 PUSHPOW2DEC
+          AND
+          4129 PUSHINT
+          XOR
+          s0 s3 XCHG
+        }>
+      }>
+      DROP
+      NIP
+      SWAP
+    }>
+    NIP
+    8 PUSHPOW2
+    DIVMOD
+    SWAP
+    NEWC
+    8 STU
+    8 STU
+    ENDC
+    CTOS
+  }>
+  __tact_base64_encode PROCREF:<{
+    x{4142434445464748494A4B4C4D4E4F505152535455565758595A6162636465666768696A6B6C6D6E6F707172737475767778797A303132333435363738392D5F} PUSHSLICE
+    NEWC
+    WHILE:<{
+      s2 PUSH
+      SBITS
+      23 GTINT
+    }>DO<{
+      s0 s2 XCHG
+      8 LDU
+      8 LDU
+      8 LDU
+      s0 s3 XCHG
+      16 LSHIFT#
+      s0 s2 XCHG
+      8 LSHIFT#
+      s1 s2 XCHG
+      OR
+      SWAP
+      OR
+      DUP
+      18 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s0 s4 XCHG2
+      STSLICE
+      s3 PUSH
+      12 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      SWAP
+      STSLICE
+      s3 PUSH
+      6 RSHIFT#
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s3 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      SWAP
+      STSLICE
+      s0 s3 XCHG
+      63 PUSHINT
+      AND
+      3 LSHIFT#
+      s2 s(-1) PUXC
+      8 PUSHINT
+          SDSUBSTR
+      s0 s3 XCHG2
+      STSLICE
+    }>
+    2 1 BLKDROP2
+    ENDC
+    CTOS
+  }>
+  __tact_address_to_user_friendly PROCREF:<{
+    REWRITESTDADDR
+    NEWC
+    x{11} PUSHSLICE
+    SWAP
+    STSLICE
+    s0 s2 XCHG
+    8 PUSHPOW2
+    ADD
+    8 MODPOW2#
+    ROT
+    8 STU
+    256 STU
+    ENDC
+    CTOS
+    DUP
+    __tact_crc16 INLINECALLDICT
+    SWAP
+    NEWC
+    STSLICE
+    STSLICE
+    ENDC
+    CTOS
+    __tact_base64_encode INLINECALLDICT
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_string_builder_start PROCINLINE:<{
+    NIL
+    SWAP
+    TPUSH
+    PUSHNULL
+    TPUSH
+  }>
+  __tact_string_builder_start_tail_string PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    8 STU
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_start_string PROCINLINE:<{
+    NEWC
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_end PROCINLINE:<{
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
+  }>
+  __tact_string_builder_end_slice PROCINLINE:<{
+    __tact_string_builder_end INLINECALLDICT
+    CTOS
+  }>
+  __tact_string_builder_append PROCREF:<{
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s0 s3 XCHG
+        STSLICE
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
+  }>
+  __tact_string_builder_append_not_mut PROCREF:<{
+    __tact_string_builder_append INLINECALLDICT
+  }>
+  __tact_dict_get_slice_slice PROCINLINE:<{
+    -ROT
+        DICTGET NULLSWAPIFNOT
+    IF:<{
+    }>ELSE<{
+      DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_slice_slice PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      STSLICE
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_get_slice_int PROCINLINE:<{
+    s1 s3 s3 XCHG3
+        DICTGET NULLSWAPIFNOT
+    IF:<{
+      SWAP
+      LDIX
+      DROP
+    }>ELSE<{
+      2DROP
+      PUSHNULL
+    }>
+  }>
+  __tact_dict_set_slice_int PROCINLINE:<{
+    OVER
+    ISNULL
+    IF:<{
+      2DROP
+      -ROT
+          DICTDEL
+      DROP
+    }>ELSE<{
+      NEWC
+      SWAP
+      STIX
+      s1 s3 s3 XCHG3
+      DICTSETB
+    }>
+  }>
+  __tact_dict_set_uint_cell PROCINLINE:<{
+    DUP
+    ISNULL
+    IF:<{
+      DROP
+      -ROT
+      DICTUDEL
+      DROP
+    }>ELSE<{
+      s1 s3 s3 XCHG3
+      DICTUSETREF
+    }>
+  }>
+  $DeployEpoch$_store PROCINLINE:<{
+    1517661758 PUSHINT
+    ROT
+    32 STU
+    SWAP
+    STVARUINT16
+  }>
+  $DeployEpoch$_store_cell PROCINLINE:<{
+    SWAP
+    $DeployEpoch$_store INLINECALLDICT
+    ENDC
+  }>
+  $PayoutStaker$_store PROCINLINE:<{
+    983256866 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    s1 s2 XCHG
+    64 STU
+    STSLICE
+    SWAP
+    STVARUINT16
+  }>
+  $PayoutStaker$_store_cell PROCINLINE:<{
+    3 -ROLL
+    $PayoutStaker$_store INLINECALLDICT
+    ENDC
+  }>
+  $ProcessEpochPayouts$_store PROCINLINE:<{
+    2370530975 PUSHINT
+    s0 s5 XCHG2
+    32 STU
+    s1 s3 XCHG
+    STSLICE
+    SWAP
+    STVARUINT16
+    32 STU
+    32 STU
+  }>
+  $ProcessEpochPayouts$_store_cell PROCINLINE:<{
+    4 -ROLL
+    $ProcessEpochPayouts$_store INLINECALLDICT
+    ENDC
+  }>
+  $NftGetAllData$_store PROCINLINE:<{
+    976894522 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $NftGetAllData$_store_cell PROCINLINE:<{
+    SWAP
+    $NftGetAllData$_store INLINECALLDICT
+    ENDC
+  }>
+  $ToncastDAO$_store PROCINLINE:<{
+    s1 16 s() XCHG
+    s0 17 s() XCHG
+    STSLICE
+    s1 s14 XCHG
+    1 STI
+    s0 s12 XCHG2
+    __tact_store_address_opt INLINECALLDICT
+    s1 s10 XCHG
+    STSLICE
+    s0 s8 XCHG2
+    STVARUINT16
+    s1 s6 XCHG
+    64 STU
+    s0 s4 XCHG
+    NEWC
+    STSLICE
+    s1 s4 XCHG
+    STBREFR
+    NEWC
+    s0 s3 XCHG
+    NEWC
+    STSLICE
+    s1 s3 XCHG
+    STBREFR
+    STDICT
+    s1 s2 XCHG
+    STDICT
+    s1 s2 XCHG
+    STREF
+    s1 s2 XCHG
+    32 STU
+    ROT
+    __tact_store_address_opt INLINECALLDICT
+    s1 s2 XCHG
+    64 STU
+    s1 s2 XCHG
+    32 STU
+    s1 s2 XCHG
+    32 STU
+    ROT
+    STVARUINT16
+    STBREFR
+  }>
+  $ToncastDAO$_load PROCINLINE:<{
+    LDMSGADDR
+    1 LDI
+                b{00} SDBEGINSQ
+                IF:<{
+                  PUSHNULL
+                }>ELSE<{
+                  LDMSGADDR
+                  SWAP
+                }>
+    SWAP
+    LDMSGADDR
+    LDVARUINT16
+    64 LDU
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDDICT
+    LDDICT
+    LDREF
+    32 LDU
+                b{00} SDBEGINSQ
+                IF:<{
+                  PUSHNULL
+                }>ELSE<{
+                  LDMSGADDR
+                  SWAP
+                }>
+    SWAP
+    64 LDU
+    32 LDU
+    32 LDU
+    LDVARUINT16
+    DROP
+    s10 17 s() XCHG
+    s10 16 s() XCHG
+    s10 s15 XCHG
+    s10 s14 XCHG
+    s10 s13 XCHG
+    s10 s12 XCHG
+    s10 s11 XCHG
+  }>
+  $Context$_get_value PROCINLINE:<{
+    s1 s3 XCHG
+    3 BLKDROP
+  }>
+  $DAOEpochData$_to_external PROCINLINE:<{
+  }>
+  $DAOConfigData$_to_external PROCINLINE:<{
+  }>
+  $ToncastDAOepoch$init$_store PROCINLINE:<{
+    s0 s2 XCHG
+    STSLICE
+    257 PUSHINT
+    STIX
+  }>
+  $ToncastDAO$init$_load PROCINLINE:<{
+    LDMSGADDR
+    LDMSGADDR
+    LDVARUINT16
+    64 LDU
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    32 LDU
+    LDREF
+    32 LDU
+    DROP
+    s4 s9 XCHG
+    s4 s8 XCHG
+    s4 s7 XCHG
+    s4 s6 XCHG
+    s4 s5 XCHG
+  }>
+  $ToncastDAO$_contract_init PROCINLINE:<{
+    FALSE
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+        NOW
+    0 PUSHINT
+    DUP
+    s6 s14 XCHG
+    PUSHNULL
+    s0 s14 XCHG
+    s7 s13 XCHG
+    s0 s12 XCHG
+    s7 s11 XCHG
+    s0 s10 XCHG
+    s7 s9 XCHG
+    s6 s8 XCHG
+    s5 s7 XCHG
+    s5 s6 XCHG
+    -ROT
+  }>
+  $ToncastDAO$_contract_load PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+    IF:<{
+      $ToncastDAO$_load INLINECALLDICT
+      17 s() POP
+      s15 16 s() XCHG
+      15 ROLL
+    }>ELSE<{
+      $ToncastDAO$init$_load INLINECALLDICT
+      s0 s9 XCHG
+      ENDS
+      8 ROLL
+      $ToncastDAO$_contract_init INLINECALLDICT
+    }>
+  }>
+  $ToncastDAO$_contract_store PROCINLINE:<{
+    NEWC
+    TRUE
+    SWAP
+    1 STI
+    s0 17 s() XCHG
+    s0 16 s() XCHG
+    15 -ROLL
+    $ToncastDAO$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $Cell$_fun_asSlice PROCINLINE:<{
+        CTOS
+  }>
+  $global_newAddress PROCINLINE:<{
+        NEWC
+    4 PUSHINT
+    SWAP
+    3 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+        ENDC
+    $Cell$_fun_asSlice INLINECALLDICT
+  }>
+  $global_contractAddressExt PROCINLINE:<{
+        s0 PUSH HASHCU // `data` hash
+        s2 PUSH HASHCU // `code` hash
+        SWAP2
+        CDEPTH         // `data` depth
+        SWAP
+        CDEPTH         // `code` depth
+        131380 INT     // (2 << 16) | (1 << 8) | 0x34
+        // Group 2: Composition of the Builder
+        NEWC
+        24 STU  // store refs_descriptor | bits_descriptor | data
+        16 STU  // store depth_descriptor for `code`
+        16 STU  // store depth_descriptor for `data`
+        256 STU // store `code` hash
+        256 STU // store `data` hash
+        // Group 3: SHA256 hash of the resulting Builder
+        ONE HASHEXT_SHA256
+    $global_newAddress INLINECALLDICT
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    $global_contractAddressExt INLINECALLDICT
+  }>
+  $StakingData$_constructor_amount_timestamp_daoAddress PROCINLINE:<{
+  }>
+  $global_parseStakingData PROCINLINE:<{
+        CTOS
+        LDVARUINT16
+    64 LDU
+        LDMSGADDR
+    DROP
+    $StakingData$_constructor_amount_timestamp_daoAddress INLINECALLDICT
+  }>
+  $String$_fun_asMetadataCell PROCINLINE:<{
+    __tact_string_builder_start_tail_string INLINECALLDICT
+    SWAP
+    __tact_string_builder_append_not_mut INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $global_composeItemMetadata PROCINLINE:<{
+    PUSHNULL
+    8 PUSHPOW2
+    59089242681608890680090686026688704441792375738894456860693970539822503415433 PUSHINT
+    s0 s5 XCHG
+    $String$_fun_asMetadataCell INLINECALLDICT
+    s1 s3 s0 XCHG3
+    s1 s5 XCHG
+    __tact_dict_set_uint_cell INLINECALLDICT
+    8 PUSHPOW2
+    90922719342317012409671596374183159143637506542604000676488204638996496437508 PUSHINT
+    s0 s3 XCHG
+    $String$_fun_asMetadataCell INLINECALLDICT
+    s1 s3 s0 XCHG3
+    __tact_dict_set_uint_cell INLINECALLDICT
+    8 PUSHPOW2
+    43884663033947008978309661017057008345326326811558777475113826163084742639165 PUSHINT
+    s0 s3 XCHG
+    $String$_fun_asMetadataCell INLINECALLDICT
+    s1 s3 s0 XCHG3
+    __tact_dict_set_uint_cell INLINECALLDICT
+        NEWC
+    0 PUSHINT
+    SWAP
+    8 STU
+        STOPTREF
+        ENDC
+  }>
+  $global_buildCollectionInitData PROCINLINE:<{
+        NEWC
+    s0 s3 XCHG2
+        STSLICER
+    0 PUSHINT
+    SWAP
+    64 STU
+    s1 s2 XCHG
+        STREF
+        STREF
+        ENDC
+  }>
+  $global_buildNftIndividualContent PROCINLINE:<{
+    __tact_string_builder_start_string INLINECALLDICT
+    s0 s4 XCHG2
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c724101010100040000042023fb092189} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    SWAP
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c72410101010003000002200de96161} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+        NOW
+        MYADDR
+    __tact_string_builder_start_string INLINECALLDICT
+        B{b5ee9c72410101010012000020546f6e63617374207374616b65643a206580061e} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    s5 PUSH
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c7241010101001100001e2061742074696d657374616d703a2023be1809} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    s2 PUSH
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c7241010101001000001c20696e20636f6e74726163743a205bf2c8ec} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    OVER
+    __tact_address_to_user_friendly INLINECALLDICT
+    __tact_string_builder_append INLINECALLDICT
+        NEWC
+    s6 PUSH
+        STVARUINT16
+    s3 s(-1) PUXC
+    64 STU
+    s2 PUSH
+        STSLICER
+        ENDC
+    __tact_string_builder_start_string INLINECALLDICT
+    s0 s6 XCHG2
+    __tact_string_builder_append INLINECALLDICT
+    s0 s6 XCHG
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    s1 s6 XCHG
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c724101010100030000022ddea549de} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    s0 s2 XCHG
+        <{
+            // x
+            NEWC // x b
+            OVER // x b x
+            0 LESSINT // x b <0?
+            <{
+                // x b
+                45 PUSHINT // x b 45
+                SWAP // x 45 b
+                8 STU // x b
+                SWAP // b x
+                NEGATE // b -x
+                SWAP // -x b
+            }>CONT IF
+            // x b
+            SWAP // b x
+            <{
+                // b x
+                10 PUSHINT DIVMOD // b x/10 x%10
+                48 ADDCONST // b x/10 (x%10+48)
+                s2 s2 s0 XC2PU ISZERO // (x%10+48) b x/10 x/10==0?
+            }>CONT UNTIL
+            // ... b x
+            DROP // ... b
+            DEPTH DEC // ... b n
+            <{ 8 STU }>CONT REPEAT // b
+        }>CONT 1 1 CALLXARGS
+        // b
+        ENDC CTOS // s
+    s1 s2 XCHG
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c724101010100030000022ddea549de} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    SWAP
+    __tact_address_to_user_friendly INLINECALLDICT
+    __tact_string_builder_append INLINECALLDICT
+        B{b5ee9c724101010100060000082e706e67be23437d} B>boc <s PUSHSLICE
+    __tact_string_builder_append INLINECALLDICT
+    SWAP
+    __tact_string_builder_end_slice INLINECALLDICT
+    s0 s3 XCHG
+    __tact_string_builder_end_slice INLINECALLDICT
+    SWAP
+    __tact_string_builder_end_slice INLINECALLDICT
+    s2 s3 XCHG
+    $global_composeItemMetadata INLINECALLDICT
+        NEWC
+    s0 s3 XCHG2
+        STSLICER
+    s1 s2 XCHG
+        STREF
+        STREF
+        ENDC
+  }>
+  $global_buildMintMessage PROCINLINE:<{
+        NEWC
+    1 PUSHINT
+    SWAP
+    32 STU
+    s1 s4 XCHG
+    64 STU
+    s1 s2 XCHG
+    64 STU
+    SWAP
+        STVARUINT16
+        STREF
+        ENDC
+  }>
+  $StateInit$_constructor_code_data PROCINLINE:<{
+  }>
+  $global_calculateJettonWalletAddress PROCREF:<{
+        B{b5ee9c7241021101000323000114ff00f4a413f4bcf2c80b0102016202100202cc03060201d4040500c30831c02497c138007434c0c05c6c2544d7c0fc03383e903e900c7e800c5c75c87e800c7e800c1cea6d0000b4c7e08403e29fa954882ea54c4d167c0278208405e3514654882ea58c511100fc02b80d60841657c1ef2ea4d67c02f817c12103fcbc2000113e910c1c2ebcb85360020120070f020120080a01f1503d33ffa00fa4021f001ed44d0fa00fa40fa40d4305136a1522ac705f2e2c128c2fff2e2c254344270542013541403c85004fa0258cf1601cf16ccc922c8cb0112f400f400cb00c920f9007074c8cb02ca07cbffc9d004fa40f40431fa0020d749c200f2e2c4778018c8cb055008cf1670fa0217cb6b13cc809009e8210178d4519c8cb1f19cb3f5007fa0222cf165006cf1625fa025003cf16c95005cc2391729171e25008a813a08209c9c380a014bcf2e2c504c98040fb001023c85004fa0258cf1601cf16ccc9ed540201200b0e02f73b51343e803e903e90350c0234cffe80145468017e903e9014d6f1c1551cdb5c150804d50500f214013e809633c58073c5b33248b232c044bd003d0032c0327e401c1d3232c0b281f2fff274140371c1472c7cb8b0c2be80146a2860822625a019ad822860822625a028062849e5c412440e0dd7c138c34975c2c0600c0d00705279a018a182107362d09cc8cb1f5230cb3f58fa025007cf165007cf16c9718010c8cb0524cf165006fa0215cb6a14ccc971fb0010241023007cc30023c200b08e218210d53276db708010c8cb055008cf165004fa0216cb6a12cb1f12cb3fc972fb0093356c21e203c85004fa0258cf1601cf16ccc9ed5400d73b51343e803e903e90350c01f4cffe803e900c145468549271c17cb8b049f0bffcb8b08160824c4b402805af3cb8b0e0841ef765f7b232c7c572cfd400fe8088b3c58073c5b25c60063232c14933c59c3e80b2dab33260103ec01004f214013e809633c58073c5b3327b55200083d40106b90f6a2687d007d207d206a1802698fc1080bc6a28ca9105d41083deecbef09dd0958f97162e99f98fd001809d02811e428027d012c678b00e78b6664f6aa4001ba0f605da89a1f401f481f481a861bb5c4775} B>boc PUSHREF
+        NEWC
+    0 PUSHINT
+        STVARUINT16
+    s0 s3 XCHG2
+        STSLICER
+    SWAP
+        STSLICER
+        STREF
+        ENDC
+        B{b5ee9c7241021101000323000114ff00f4a413f4bcf2c80b0102016202100202cc03060201d4040500c30831c02497c138007434c0c05c6c2544d7c0fc03383e903e900c7e800c5c75c87e800c7e800c1cea6d0000b4c7e08403e29fa954882ea54c4d167c0278208405e3514654882ea58c511100fc02b80d60841657c1ef2ea4d67c02f817c12103fcbc2000113e910c1c2ebcb85360020120070f020120080a01f1503d33ffa00fa4021f001ed44d0fa00fa40fa40d4305136a1522ac705f2e2c128c2fff2e2c254344270542013541403c85004fa0258cf1601cf16ccc922c8cb0112f400f400cb00c920f9007074c8cb02ca07cbffc9d004fa40f40431fa0020d749c200f2e2c4778018c8cb055008cf1670fa0217cb6b13cc809009e8210178d4519c8cb1f19cb3f5007fa0222cf165006cf1625fa025003cf16c95005cc2391729171e25008a813a08209c9c380a014bcf2e2c504c98040fb001023c85004fa0258cf1601cf16ccc9ed540201200b0e02f73b51343e803e903e90350c0234cffe80145468017e903e9014d6f1c1551cdb5c150804d50500f214013e809633c58073c5b33248b232c044bd003d0032c0327e401c1d3232c0b281f2fff274140371c1472c7cb8b0c2be80146a2860822625a019ad822860822625a028062849e5c412440e0dd7c138c34975c2c0600c0d00705279a018a182107362d09cc8cb1f5230cb3f58fa025007cf165007cf16c9718010c8cb0524cf165006fa0215cb6a14ccc971fb0010241023007cc30023c200b08e218210d53276db708010c8cb055008cf165004fa0216cb6a12cb1f12cb3fc972fb0093356c21e203c85004fa0258cf1601cf16ccc9ed5400d73b51343e803e903e90350c01f4cffe803e900c145468549271c17cb8b049f0bffcb8b08160824c4b402805af3cb8b0e0841ef765f7b232c7c572cfd400fe8088b3c58073c5b25c60063232c14933c59c3e80b2dab33260103ec01004f214013e809633c58073c5b3327b55200083d40106b90f6a2687d007d207d206a1802698fc1080bc6a28ca9105d41083deecbef09dd0958f97162e99f98fd001809d02811e428027d012c678b00e78b6664f6aa4001ba0f605da89a1f401f481f481a861bb5c4775} B>boc PUSHREF
+    SWAP
+    $StateInit$_constructor_code_data INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+  }>
+  $global_calculateNftItemAddress PROCINLINE:<{
+        NEWC
+    64 STU
+    SWAP
+        STSLICER
+        ENDC
+        B{b5ee9c7241021101000248000114ff00f4a413f4bcf2c80b01020162020e0202ce030b020120040a03e50c8871c02497c0f83434c0c05c6c2497c0f83e903e900c7e800c5c75c87e800c7e800c1cea6d003c00816ce38556db088d148cb1c17cb865407e9035350c040d3c00f801f4c7f4cfe08417f30f45148c2eb8c08c0d8dcde0840bf2c9a894982eb8c0a0840e8e8e8e85aeb8c097c1a103fcbc2005080902b2321048103710261045025136c705f2e191fa4021f001fa40d20031fa0020d749c200f2e2c4820afaf0801ca121945315a0a1de22d70b01c300209206a19136e220c2fff2e1922194102b385be30d0293303335e30d5503f0030607007c821005138d91c8500acf16500ccf1671244a145446b0708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb001058006a27f0018210d53276db103845006d71708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb00007c3234347082108b77173504c8cb3f5005cf16102410238040708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb00008ec85005cf165005cf16c9c8cc14ccc97082107b7b7b7b04c8cb3f12cc4430128040708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb0000113e910c1c2ebcb853600201200c0d00393b513434cffe900835d27080263e9035350c1fd550380c1c165b5b5b600021013232cfd400f3c58073c5b333327b552002016a0f10000bb5f9fe004610000bb4c03e00463044d67833} B>boc PUSHREF
+    SWAP
+    $StateInit$_constructor_code_data INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+  }>
+  $ToncastDAOepoch$_init_child PROCREF:<{
+        B{b5ee9c7201021101000357000228ff008e88f4a413f4bcf2c80bed5320e303ed43d90102020378a0030402ec3001d072d721d200d200fa4021103450666f04f86102f862ed44d0d200019efa40d31ffa00fa00d20055406c159efa40810101d7005902d101702070e206925f06e004d70d1fdd2182105a75ae3ebae3020182103a9b4f22bae302304034c87f01ca0055405045ce12cb1f01fa0201fa02ca00c9ed540a0b0157bb571ed44d0d200019efa40d31ffa00fa00d20055406c159efa40810101d7005902d101702070e2db3c6c558050201200607000a54732153370157b4a3bda89a1a400033df481a63ff401f401a400aa80d82b3df481020203ae00b205a202e040e1c5b678d8a3008015bb416fda89a1a400033df481a63ff401f401a400aa80d82b3df481020203ae00b205a202e040e1c4aa09b678d8a3009000224004821b3917f9322c000e2917f9320c101e2923070e023a822a9042082084c4b40b9923070e0019c31fa003010344135db3c6c21b3f2e1fc22c200f2e1f5f8416f24135f03820afaf080bef2e1faf8416f24135f03820afaf080a155027fc87f01ca0055405045ce12cb1f01fa0201fa02ca00c9ed540c04f4d33f31fa40fa00305056db3c20f2e1f426c200f2e1f65361bbf2e1f721c200f2e1f95162a821a9042082084c4b40bef2e1f8c86f00016f8c6d6f8c8b745706f636820238db3c248e22c821c10098802d01cb0701a301de019a7aa90ca630541220c000e63068a592cb07e4da11c9d0db3c8b72072657761726480c10100d0010f84225c705f2e08404fedb3cf8276f102282084c4b40a0bc8eb38042016f2201c993216eb396016f2259ccc9e831d0db3c103740037fc8cf8580ca00cf8440ce01fa02806acf40f400c901fb008eb731708100a0026f2201c993216eb396016f2259ccc9e831d0db3c10371240037fc8cf8580ca00cf8440ce01fa02806acf40f400c901fb00e24034100e0e0f0142c87001cb1f6f00016f8c6d6f8c01db3c6f2201c993216eb396016f2259ccc9e831100030c87f01ca0055405045ce12cb1f01fa0201fa02ca00c9ed5400b620d74a21d7499720c20022c200b18e48036f22807f22cf31ab02a105ab025155b60820c2009a20aa0215d71803ce4014de596f025341a1c20099c8016f025044a1aa028e123133c20099d430d020d74a21d749927020e2e2e85f03} B>boc PUSHREF
+    NEWC
+    FALSE
+    SWAP
+    1 STI
+    2SWAP
+    $ToncastDAOepoch$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $global_calculateEpochContractAddress PROCINLINE:<{
+    SWAP
+    $ToncastDAOepoch$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+  }>
+  $ToncastDAO$_fun_getCurrentEpochNumber PROCINLINE:<{
+        NOW
+    s4 PUSH
+    LESS
+    IF:<{
+      0 PUSHINT
+    }>ELSE<{
+          NOW
+      s4 PUSH
+      SUB
+      s3 PUSH
+      DIV
+    }>
+  }>
+  $MessageParameters$_constructor_to_value_mode_body PROCINLINE:<{
+    s0 s0 s3 XCHG3
+    TRUE
+  }>
+  $DeployParameters$_constructor_init_value_mode_body PROCINLINE:<{
+    s4 s3 XCHG2
+    TRUE
+    -ROT
+  }>
+  $DeployEpoch$_constructor_totalToncastStaked PROCINLINE:<{
+  }>
+  $ToncastDAO$_fun_checkAndUpdateEpoch PROCINLINE:<{
+    s15 PUSH
+    IF:<{
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+            BALANCE FIRST
+        DUP
+        50000000 PUSHINT
+        GREATER
+        IF:<{
+          s5 PUSH
+          __tact_not_null INLINECALLDICT
+          SWAP
+          50000000 PUSHINT
+          SUB
+          2 PUSHINT
+          PUSHNULL
+          $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+              NEWC
+              b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+              1 STI               // store `bounce`
+              b{000} STSLICECONST // store bounced = false and src = addr_none
+              STSLICE             // store `to`
+              SWAP
+              STGRAMS             // store `value`
+              106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+              STZEROES
+              // → Stack state
+              // s0: Builder
+              // s1: `body`
+              // s2: `mode`
+              STDICT
+              ENDC
+              SWAP
+              SENDRAWMSG
+        }>ELSE<{
+          DROP
+        }>
+      }>
+    }>ELSE<{
+      $ToncastDAO$_fun_getCurrentEpochNumber INLINECALLDICT
+      s0 s2 PUSH2
+      GREATER
+      IF:<{
+            BALANCE FIRST
+        50000000 PUSHINT
+        SUB
+        DUP
+        100000000 PUSHINT
+        GREATER
+        IF:<{
+              MYADDR
+          s0 s4 XCHG2
+          $ToncastDAOepoch$_init_child INLINECALLDICT
+          2 PUSHINT
+          s4 PUSH
+          $DeployEpoch$_constructor_totalToncastStaked INLINECALLDICT
+          NEWC
+          $DeployEpoch$_store_cell INLINECALLDICT
+          s3 s4 XCHG
+          s2 s3 XCHG
+          s2 s6 XCHG
+          $DeployParameters$_constructor_init_value_mode_body INLINECALLDICT
+              4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+              HASHCU // `init.data` hash
+              SWAP
+              HASHCU // `init.code` hash
+              SWAP2
+              CDEPTH // `init.data` depth
+              SWAP
+              CDEPTH // `init.code` depth
+              // Group 2: Calculating destination address
+              // For almost identical logic and instructions,
+              // see comments inside `contractHash()` function in contract.tact
+              131380 INT // (2 << 16) | (1 << 8) | 0x34
+              NEWC
+              24 STU
+              16 STU
+              16 STU
+              256 STU
+              256 STU
+              ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+              // → Stack state
+              // s0: destAddr(hash part)
+              // s1: `init.data`
+              // s2: `init.code`
+              // s3 and below: `bounce`, `value`, `body`, `mode`
+              // Group 3: Building a message (CommonMsgInfoRelaxed)
+              s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+              NEWC
+              b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+              1 STI              // store `bounce`
+              s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+              STREF              // store `init.code`
+              STREF              // store `init.data`
+              // Inline StateInit:
+              b{00010000000000} STSLICECONST
+              // 0 + 00 + 10 + 0 + 00000000
+              // 1) 0 - bounced = false
+              // 2) 00 - src = addr_none
+              // 3) 10 - tag of addr_std (part of dest)
+              // 4) 0 - Maybe Anycast = false
+              // 5) 00000000 - workchain_id (part of dest)
+              //
+              256 STU     // store destAddr(hash part)
+              SWAP        // Builder on top, `value` below
+              STGRAMS     // store `value`
+              105 PUSHINT // 1 + 4 + 4 + 64 + 32
+              STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+              // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+              // Remaining bits of MessageRelaxed:
+              b{1000110} STSLICECONST
+              // 10 + 0 + 0 + 1 + 1 + 0
+              // 10 - Maybe (Either StateInit ^StateInit) = true false
+              // 0 - split_depth:(Maybe (## 5)) = false
+              // 0 = special:(Maybe TickTock) = false
+              // 1 = code:(Maybe ^Cell) = true
+              // 1 = data:(Maybe ^Cell) = true
+              // 0 = library:(Maybe ^Cell) = false
+              //
+              STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+              ENDC   // finalize the message
+              // → Stack state
+              // s0: Cell
+              // s1: params.`mode`
+              // Group 5: Sending the message, with `mode` on top
+              SWAP
+              SENDRAWMSG
+        }>ELSE<{
+          DROP
+          s2 POP
+        }>
+      }>ELSE<{
+        DROP
+      }>
+    }>
+  }>
+  $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress PROCINLINE:<{
+  }>
+  $ToncastDAO$_fun_getDAOConfigData PROCREF:<{
+        MYADDR
+    s14 PUSH
+    $global_calculateJettonWalletAddress INLINECALLDICT
+    s15 PUSH
+    ISNULL
+    NOT
+    s13 PUSH
+    s0 s2 XCHG
+    17 s() PUSH
+    s0 s2 XCHG
+    17 s() PUSH
+    -ROT
+    17 s() PUSH
+    SWAP
+    16 s() PUSH
+    SWAP
+    16 s() PUSH
+    SWAP
+    23 s() PUSH
+    s13 PUSH
+    $DAOConfigData$_constructor_nextItemIndex_nftCollectionAddress_jettonMasterAddress_jettonWalletAddress_minDepositAmount_nftNamePrefix_nftImageUrl_isReadyToAcceptDeposits_stopped_newDaoAddress INLINECALLDICT
+  }>
+  $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked PROCINLINE:<{
+  }>
+  $ToncastDAO$_fun_getDAOEpochData PROCREF:<{
+    s3 PUSH
+    16 s() 17 s() XCHG
+    s15 17 s() XCHG
+    s14 17 s() XCHG
+    s13 17 s() XCHG
+    s12 17 s() XCHG
+    s11 17 s() XCHG
+    s10 17 s() XCHG
+    s9 17 s() XCHG
+    s0 17 s() XCHG
+    s0 s8 XCHG
+    s0 s7 XCHG
+    s0 s6 XCHG
+    5 -ROLL
+    $ToncastDAO$_fun_getCurrentEpochNumber INLINECALLDICT
+    s1 18 s() XCHG
+    2OVER
+    20 s() PUSH
+    $DAOEpochData$_constructor_deployTime_currentRealTimeEpoch_epochDuration_currentStoredEpochNumber_totalCurrentlyStaked INLINECALLDICT
+    20 s() 21 s() XCHG
+    19 s() 20 s() XCHG
+    18 s() 19 s() XCHG
+    17 s() 18 s() XCHG
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    s14 s15 XCHG
+    s13 s14 XCHG
+    s12 s13 XCHG
+    s11 s12 XCHG
+    s10 s11 XCHG
+    s9 s10 XCHG
+    s8 s9 XCHG
+    s7 s8 XCHG
+    s6 s7 XCHG
+    s5 s6 XCHG
+  }>
+  $ToncastDAO$_fun_getEpochContractAddress PROCREF:<{
+        MYADDR
+    $global_calculateEpochContractAddress INLINECALLDICT
+  }>
+  $ToncastDAO$_fun_getCollectionMetadata PROCREF:<{
+    s6 PUSH
+  }>
+  $ToncastDAO$_fun_requireOwner PROCREF:<{
+    __tact_context_get_sender INLINECALLDICT
+    17 s() PUSH
+    SDEQ
+    132 THROWIFNOT
+  }>
+  $ToncastDAO$_fun_owner PROCREF:<{
+    16 s() PUSH
+  }>
+  $MessageParameters$_constructor_to_value_body PROCINLINE:<{
+    0 PUSHINT
+    s2 s3 XCHG2
+    TRUE
+  }>
+  $NftGetAllData$_constructor_queryId PROCINLINE:<{
+  }>
+  $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch PROCINLINE:<{
+  }>
+  $PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount PROCINLINE:<{
+  }>
+  %getDAOConfigData PROC:<{
+    $ToncastDAO$_contract_load INLINECALLDICT
+    $ToncastDAO$_fun_getDAOConfigData INLINECALLDICT
+    10 10 BLKDROP2
+    7 10 BLKDROP2
+    $DAOConfigData$_to_external INLINECALLDICT
+  }>
+  %getDAOEpochData PROC:<{
+    $ToncastDAO$_contract_load INLINECALLDICT
+    $ToncastDAO$_fun_getDAOEpochData INLINECALLDICT
+    15 5 BLKDROP2
+    2 5 BLKDROP2
+    $DAOEpochData$_to_external INLINECALLDICT
+  }>
+  %getEpochContractAddress PROC:<{
+    $ToncastDAO$_contract_load INLINECALLDICT
+    16 s() 17 s() XCHG
+    s15 16 s() XCHG
+    15 ROLL
+    $ToncastDAO$_fun_getEpochContractAddress INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %getCollectionMetadata PROC:<{
+    $ToncastDAO$_contract_load INLINECALLDICT
+    $ToncastDAO$_fun_getCollectionMetadata INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  %owner PROC:<{
+    $ToncastDAO$_contract_load INLINECALLDICT
+    $ToncastDAO$_fun_owner INLINECALLDICT
+    16 s() POP
+    15 BLKDROP
+    NIP
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    2 PUSHINT
+    SDSKIPFIRST
+    1 LDI
+    1 LDI
+    LDMSGADDR
+    OVER
+    s3 s4 XCHG
+    s6 s6 XCHG2
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $ToncastDAO$_contract_load INLINECALLDICT
+    s0 18 s() XCHG
+    IFJMP:<{
+      15 BLKDROP
+      3 BLKDROP
+    }>
+    0 PUSHINT
+    17 s() PUSH
+    SBITS
+    31 GTINT
+    IF:<{
+      DROP
+      16 s() PUSH
+      32 PLDU
+    }>
+    DUP
+    1935855772 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      s0 16 s() XCHG
+      32 PUSHINT
+      SDSKIPFIRST
+      64 LDU
+      LDVARUINT16
+      LDMSGADDR
+      DROP
+          MYADDR
+      s15 PUSH
+      $global_calculateJettonWalletAddress INLINECALLDICT
+      __tact_context_get_sender INLINECALLDICT
+      SWAP
+      SDEQ
+      401 THROWIFNOT
+      s1 s13 PUSH2
+      GEQ
+      402 THROWIFNOT
+      __tact_context_get INLINECALLDICT
+      $Context$_get_value INLINECALLDICT
+      200000000 PUSHINT
+      GEQ
+      403 THROWIFNOT
+      s15 PUSH
+      ISNULL
+      NOT
+      410 THROWIFNOT
+      s0 19 s() XCHG
+      OVER
+      ADD
+      s1 19 s() XCHG
+      s11 s10 s(-2) PU2XC
+      s14 s(-1) PUXC
+      s0 22 s() XCHG
+      $global_buildNftIndividualContent INLINECALLDICT
+      50000000 PUSHINT
+      s12 PUSH
+      s0 s2 XCHG
+      $global_buildMintMessage INLINECALLDICT
+      s13 PUSH
+      __tact_not_null INLINECALLDICT
+      60000000 PUSHINT
+      ROT
+      $MessageParameters$_constructor_to_value_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+          STZEROES
+          // → Stack state
+          // s0: Builder
+          // s1: `body`
+          // s2: `mode`
+          STDICT
+          ENDC
+          SWAP
+          SENDRAWMSG
+      s0 s9 XCHG
+      INC
+      s14 16 s() XCHG
+      s13 s15 XCHG
+      s12 s14 XCHG
+      s11 s13 XCHG
+      s10 s12 XCHG
+      s0 s11 XCHG
+      s8 s10 XCHG
+      s7 s9 XCHG
+      s6 s8 XCHG
+      s5 s7 XCHG
+      s4 s6 XCHG
+      s3 s5 XCHG
+      s4 s0 s3 XCHG3
+      s0 s2 XCHG
+      $ToncastDAO$_fun_checkAndUpdateEpoch INLINECALLDICT
+      $ToncastDAO$_contract_store INLINECALLDICT
+    }>
+    DUP
+    85167505 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      s0 16 s() XCHG
+      32 PUSHINT
+      SDSKIPFIRST
+      64 LDU
+      LDMSGADDR
+      DROP
+      s14 PUSH
+      ISNULL
+      NOT
+      410 THROWIFNOT
+      __tact_context_get_sender INLINECALLDICT
+      s0 s9 XCHG
+      267 PUSHINT
+      s10 s3 PUSH2
+      257 PUSHINT
+      __tact_dict_set_slice_int INLINECALLDICT
+      s1 s8 XCHG
+      267 PUSHINT
+      s0 s10 s9 XCPUXC
+      __tact_dict_set_slice_slice INLINECALLDICT
+      __tact_context_get INLINECALLDICT
+      $Context$_get_value INLINECALLDICT
+      DUP
+      10 PUSHINT
+      DIV
+      SUB
+      1 PUSHINT
+      s0 s3 XCHG
+      $NftGetAllData$_constructor_queryId INLINECALLDICT
+      NEWC
+      $NftGetAllData$_store_cell INLINECALLDICT
+      s3 s10 XCHG
+      s1 s10 s0 XCHG3
+      $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+          STZEROES
+          // → Stack state
+          // s0: Builder
+          // s1: `body`
+          // s2: `mode`
+          STDICT
+          ENDC
+          SWAP
+          SENDRAWMSG
+      s14 16 s() XCHG
+      s13 s15 XCHG
+      s12 s14 XCHG
+      s11 s13 XCHG
+      s10 s12 XCHG
+      s9 s11 XCHG
+      s8 s10 XCHG
+      s7 s9 XCHG
+      4 5 REVERSE
+      2 5 BLKSWAP
+      $ToncastDAO$_contract_store INLINECALLDICT
+    }>
+    DUP
+    2071690107 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      s0 16 s() XCHG
+      32 PUSHINT
+      SDSKIPFIRST
+      64 LDU
+      64 LDU
+      LDREF
+      DROP
+      __tact_context_get_sender INLINECALLDICT
+      s10 PUSH
+      267 PUSHINT
+      s2 PUSH
+      257 PUSHINT
+      __tact_dict_get_slice_int INLINECALLDICT
+      DUP
+      ISNULL
+      NOT
+      411 THROWIFNOT
+      s10 PUSH
+      267 PUSHINT
+      s3 PUSH
+      __tact_dict_get_slice_slice INLINECALLDICT
+      DUP
+      ISNULL
+      NOT
+      411 THROWIFNOT
+      SWAP
+      __tact_not_null INLINECALLDICT
+      s5 PUSH
+      EQUAL
+      412 THROWIFNOT
+      s0 s2 XCHG
+          CTOS
+      DUP
+          SREFS
+      1 GTINT
+      419 THROWIFNOT
+          LDREF
+      SWAP
+          CTOS
+          LDMSGADDR
+          LDMSGADDR
+      DROP
+      s0 s2 XCHG
+          LDREF
+      DROP
+      19 s() PUSH
+      __tact_not_null INLINECALLDICT
+      s1 s2 XCHG
+      SDEQ
+      413 THROWIFNOT
+      18 s() PUSH
+      __tact_not_null INLINECALLDICT
+      s0 s5 XCHG2
+      $global_calculateNftItemAddress INLINECALLDICT
+      s2 s(-1) PUXC
+      SDEQ
+      418 THROWIFNOT
+          MYADDR
+      SDEQ
+      414 THROWIFNOT
+      s0 s2 XCHG
+      $global_parseStakingData INLINECALLDICT
+          MYADDR
+      SDEQ
+      417 THROWIFNOT
+      s3 s11 PUXC
+      267 PUSHINT
+          DICTDEL
+      DROP
+      s3 s10 XCHG2
+      267 PUSHINT
+          DICTDEL
+      DROP
+      s0 20 s() XCHG
+      s2 PUSH
+      SUB
+      __tact_context_get INLINECALLDICT
+      $Context$_get_value INLINECALLDICT
+      10000000 PUSHINT
+      SUB
+      s11 s6 XCPU
+      SUB
+      s5 PUSH
+      DIV
+      DUP
+      0 EQINT
+      IF:<{
+        DROP
+        0 PUSHINT
+      }>ELSE<{
+        INC
+      }>
+      16 s() 19 s() XCHG
+      s15 18 s() XCHG
+      s14 17 s() XCHG
+      s13 19 s() XCHG
+      s12 18 s() XCHG
+      s11 17 s() XCHG
+      s10 19 s() XCHG
+      s9 18 s() XCHG
+      s8 19 s() XCHG
+      s7 21 s() XCHG
+      s6 18 s() XCHG
+      s5 19 s() XCHG
+      s4 21 s() XCHG
+      s3 18 s() XCHG
+      s2 19 s() XCHG
+      s0 20 s() XCHG
+      SWAP
+      $ToncastDAO$_fun_getCurrentEpochNumber INLINECALLDICT
+      DEC
+      0 PUSHINT
+      OVER
+      23 s() PUSH
+      GEQ
+      IF:<{
+        DROP
+        DUP
+        22 s() PUSH
+        SUB
+        INC
+        DUP
+        99 ADDCONST
+        100 PUSHINT
+        DIV
+        10000000 PUSHINT
+        ROT
+        MUL
+        10000000 PUSHINT
+        ROT
+        MUL
+        ADD
+      }>
+      s0 19 s() XCHG
+      19 s() PUSH
+      SUB
+          MYADDR
+      16 s() PUSH
+      $global_calculateJettonWalletAddress INLINECALLDICT
+      PUSHNULL
+      PUSHNULL
+          NEWC
+      260734629 PUSHINT
+      SWAP
+      32 STU
+      s1 27 s() XCHG
+      64 STU
+      23 s() PUSH
+          STVARUINT16
+      24 s() PUSH
+      __tact_not_null INLINECALLDICT
+          STSLICER
+      24 s() PUSH
+      __tact_not_null INLINECALLDICT
+          STSLICER
+      s1 26 s() XCHG
+          STOPTREF
+      s2 PUSH
+      85 MULCONST
+      100 PUSHINT
+      DIV
+          STVARUINT16
+      s1 25 s() XCHG
+          STOPTREF
+          ENDC
+      s2 24 s() XCHG
+      2 PUSHINT
+      SWAP
+      $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+          NEWC
+          b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+          1 STI               // store `bounce`
+          b{000} STSLICECONST // store bounced = false and src = addr_none
+          STSLICE             // store `to`
+          SWAP
+          STGRAMS             // store `value`
+          106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+          STZEROES
+          // → Stack state
+          // s0: Builder
+          // s1: `body`
+          // s2: `mode`
+          STDICT
+          ENDC
+          SWAP
+          SENDRAWMSG
+      17 s() PUSH
+      0 GTINT
+      IF:<{
+            MYADDR
+        1 PUSHINT
+        s0 21 s() XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s3 XCHG
+        s2 20 s() XCHG
+        s1 22 s() XCHG
+        s0 23 s() XCHG
+        $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch INLINECALLDICT
+        NEWC
+        $ProcessEpochPayouts$_store_cell INLINECALLDICT
+        s3 19 s() XCHG
+        s2 16 s() XCHG
+        s1 18 s() XCHG
+        $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `body`
+            // s2: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+        s15 16 s() XCHG
+        s12 s15 XCHG
+        s12 s13 XCHG
+      }>ELSE<{
+        s4 21 s() XCHG
+        s3 20 s() XCHG
+        s2 19 s() XCHG
+        17 s() POP
+        17 s() POP
+        3 BLKDROP
+      }>
+      s11 16 s() XCHG
+      s10 s15 XCHG
+      s9 s14 XCHG
+      s8 s13 XCHG
+      s7 s12 XCHG
+      5 7 BLKSWAP
+      $ToncastDAO$_contract_store INLINECALLDICT
+    }>
+    DUP
+    2370530975 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      s0 16 s() XCHG
+      32 PUSHINT
+      SDSKIPFIRST
+      LDMSGADDR
+      LDVARUINT16
+      32 LDU
+      32 LDU
+      DROP
+      __tact_context_get_sender INLINECALLDICT
+          MYADDR
+      SDEQ
+      430 THROWIFNOT
+      OVER
+      100 ADDCONST
+      DEC
+      OVER
+          MIN
+      WHILE:<{
+        s2 s0 PUSH2
+        LEQ
+      }>DO<{
+            MYADDR
+        s3 s(-1) PUXC
+        $global_calculateEpochContractAddress INLINECALLDICT
+        10000000 PUSHINT
+        2 PUSHINT
+        0 PUSHINT
+        s8 s7 PUSH2
+        $PayoutStaker$_constructor_queryId_stakerAddress_stakerToncastAmount INLINECALLDICT
+        NEWC
+        $PayoutStaker$_store_cell INLINECALLDICT
+        $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `body`
+            // s2: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+        s0 s2 XCHG
+        INC
+        s0 s2 XCHG
+      }>
+      s2 POP
+      2DUP
+      LESS
+      IF:<{
+            MYADDR
+        0 PUSHINT
+        66 PUSHINT
+        s0 s4 XCHG
+        INC
+        s3 s6 XCHG
+        s5 s0 s6 XCHG3
+        $ProcessEpochPayouts$_constructor_userAddress_withdrawnAmount_startEpoch_endEpoch INLINECALLDICT
+        NEWC
+        $ProcessEpochPayouts$_store_cell INLINECALLDICT
+        s2 s3 XCHG
+        $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `body`
+            // s2: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+      }>ELSE<{
+        4 BLKDROP
+      }>
+      s14 16 s() XCHG
+      2 14 BLKSWAP
+      $ToncastDAO$_contract_store INLINECALLDICT
+    }>
+    DUP
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      16 s() POP
+      s0 s12 XCHG
+      ISNULL
+      409 THROWIFNOT
+      __tact_context_get INLINECALLDICT
+      $Context$_get_value INLINECALLDICT
+      DUP
+      10 PUSHINT
+      DIV
+          NEWC
+          ENDC
+          NEWC
+      s7 s(-1) PUXC
+          STREF
+          STREF
+          ENDC
+          MYADDR
+          B{b5ee9c7241021101000248000114ff00f4a413f4bcf2c80b01020162020e0202ce030b020120040a03e50c8871c02497c0f83434c0c05c6c2497c0f83e903e900c7e800c5c75c87e800c7e800c1cea6d003c00816ce38556db088d148cb1c17cb865407e9035350c040d3c00f801f4c7f4cfe08417f30f45148c2eb8c08c0d8dcde0840bf2c9a894982eb8c0a0840e8e8e8e85aeb8c097c1a103fcbc2005080902b2321048103710261045025136c705f2e191fa4021f001fa40d20031fa0020d749c200f2e2c4820afaf0801ca121945315a0a1de22d70b01c300209206a19136e220c2fff2e1922194102b385be30d0293303335e30d5503f0030607007c821005138d91c8500acf16500ccf1671244a145446b0708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb001058006a27f0018210d53276db103845006d71708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb00007c3234347082108b77173504c8cb3f5005cf16102410238040708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb00008ec85005cf165005cf16c9c8cc14ccc97082107b7b7b7b04c8cb3f12cc4430128040708010c8cb055007cf165005fa0215cb6a12cb1fcb3f226eb39458cf17019132e201c901fb0000113e910c1c2ebcb853600201200c0d00393b513434cffe900835d27080263e9035350c1fd550380c1c165b5b5b600021013232cfd400f3c58073c5b333327b552002016a0f10000bb5f9fe004610000bb4c03e00463044d67833} B>boc PUSHREF
+      ROT
+      $global_buildCollectionInitData INLINECALLDICT
+          B{b5ee9c7241021001000181000114ff00f4a413f4bcf2c80b01020162020b0202cd030602e1d10638048adf000e8698180b8d848adf07d201800e98fe99f98f6a2687d20699fea6a1828b1e382f970c8926000c7179a01699fa989ddf970c92989dd00fd006a1813881a2cf803470880d22001e42802678b09659fe66664f6aa492f82717012600171811901e001f1812f824207f9784040500a0347003d4308e378040f4966fa5208e2906a4208100fabe93f2c18fde81019321a05325bbf2f402fa00d43022544a30f00623ba9302a402de04926c21e2b3e630325023c85004cf1612cb3fccccc9ed54002401fa403003c85004cf1612cb3fccccc9ed54020120070a0201200809002d007232cffe0a33c5b25c083232c044fd003d0032c03260001b3e401d3232c084b281f2fff27420003d45af0047021f005778018c8cb0558cf165004fa0213cb6b12ccccc971fb0080201200c0f0201200d0e0007b8b5d3180029ba7a3ed44d0fa40d33fd4d4306c31f0047001f00580023bc82df6a2687d20699fea6a1818686a182c4e328de4a} B>boc PUSHREF
+      SWAP
+      $StateInit$_constructor_code_data INLINECALLDICT
+      2DUP
+      $global_contractAddress INLINECALLDICT
+      s4 s3 XCHG2
+      SUB
+      s1 s3 s0 XCHG3
+      1 PUSHINT
+      PUSHNULL
+      $DeployParameters$_constructor_init_value_mode_body INLINECALLDICT
+          4 1 BLKPUSH // pushes 2 copies of `init.code` and `init.data`
+          HASHCU // `init.data` hash
+          SWAP
+          HASHCU // `init.code` hash
+          SWAP2
+          CDEPTH // `init.data` depth
+          SWAP
+          CDEPTH // `init.code` depth
+          // Group 2: Calculating destination address
+          // For almost identical logic and instructions,
+          // see comments inside `contractHash()` function in contract.tact
+          131380 INT // (2 << 16) | (1 << 8) | 0x34
+          NEWC
+          24 STU
+          16 STU
+          16 STU
+          256 STU
+          256 STU
+          ONE HASHEXT_SHA256 // obtains hash part (account id) of the address
+          // → Stack state
+          // s0: destAddr(hash part)
+          // s1: `init.data`
+          // s2: `init.code`
+          // s3 and below: `bounce`, `value`, `body`, `mode`
+          // Group 3: Building a message (CommonMsgInfoRelaxed)
+          s3 XCHG0           // swaps `bounce` with destAddr(hash part)
+          NEWC
+          b{01} STSLICECONST // store tag = $0 and ihr_disabled = true
+          1 STI              // store `bounce`
+          s1 s2 XCHG         // swap `init.data` with `init.code`, placing code on s1
+          STREF              // store `init.code`
+          STREF              // store `init.data`
+          // Inline StateInit:
+          b{00010000000000} STSLICECONST
+          // 0 + 00 + 10 + 0 + 00000000
+          // 1) 0 - bounced = false
+          // 2) 00 - src = addr_none
+          // 3) 10 - tag of addr_std (part of dest)
+          // 4) 0 - Maybe Anycast = false
+          // 5) 00000000 - workchain_id (part of dest)
+          //
+          256 STU     // store destAddr(hash part)
+          SWAP        // Builder on top, `value` below
+          STGRAMS     // store `value`
+          105 PUSHINT // 1 + 4 + 4 + 64 + 32
+          STZEROES    // store currency_collection, ihr_fee, fwd_fee, created_lt and created_at
+          // Group 4: Continue building a message (CommonMsgInfoRelaxed into MessageRelaxed)
+          // Remaining bits of MessageRelaxed:
+          b{1000110} STSLICECONST
+          // 10 + 0 + 0 + 1 + 1 + 0
+          // 10 - Maybe (Either StateInit ^StateInit) = true false
+          // 0 - split_depth:(Maybe (## 5)) = false
+          // 0 = special:(Maybe TickTock) = false
+          // 1 = code:(Maybe ^Cell) = true
+          // 1 = data:(Maybe ^Cell) = true
+          // 0 = library:(Maybe ^Cell) = false
+          //
+          STDICT // store `body` as ref with an extra Maybe bit, since `body` might be null
+          ENDC   // finalize the message
+          // → Stack state
+          // s0: Cell
+          // s1: params.`mode`
+          // Group 5: Sending the message, with `mode` on top
+          SWAP
+          SENDRAWMSG
+      s14 16 s() XCHG
+      s13 s15 XCHG
+      s0 s14 XCHG
+      s11 s13 XCHG
+      s10 s12 XCHG
+      s9 s11 XCHG
+      s8 s10 XCHG
+      s7 s9 XCHG
+      s6 s8 XCHG
+      s5 s7 XCHG
+      s4 s6 XCHG
+      s3 s5 XCHG
+      s4 s3 s0 XCHG3
+      $ToncastDAO$_contract_store INLINECALLDICT
+    }>
+    1398034256 PUSHINT
+    EQUAL
+    IFJMP:<{
+      s0 16 s() XCHG
+      32 PUSHINT
+      SDSKIPFIRST
+      LDMSGADDR
+      DROP
+      s15 16 s() XCHG
+      s14 s15 XCHG
+      s13 s14 XCHG
+      s12 s13 XCHG
+      s11 s12 XCHG
+      s10 s11 XCHG
+      s9 s10 XCHG
+      s8 s9 XCHG
+      s7 s8 XCHG
+      s6 s7 XCHG
+      s5 s6 XCHG
+      s4 s5 XCHG
+      s3 s4 XCHG
+      s0 17 s() XCHG
+      s1 s3 s0 XCHG3
+      $ToncastDAO$_fun_requireOwner INLINECALLDICT
+      s4 POP
+      s14 POP
+      TRUE
+      16 s() PUSH
+          BALANCE FIRST
+      DUP
+      50000000 PUSHINT
+      GREATER
+      IF:<{
+        50000000 PUSHINT
+        SUB
+        s1 18 s() XCHG
+        2 PUSHINT
+        PUSHNULL
+        $MessageParameters$_constructor_to_value_mode_body INLINECALLDICT
+            NEWC
+            b{01} STSLICECONST  // store tag = $0 and ihr_disabled = true
+            1 STI               // store `bounce`
+            b{000} STSLICECONST // store bounced = false and src = addr_none
+            STSLICE             // store `to`
+            SWAP
+            STGRAMS             // store `value`
+            106 PUSHINT         // 1 + 4 + 4 + 64 + 32 + 1
+            STZEROES
+            // → Stack state
+            // s0: Builder
+            // s1: `body`
+            // s2: `mode`
+            STDICT
+            ENDC
+            SWAP
+            SENDRAWMSG
+      }>ELSE<{
+        DROP
+        17 s() POP
+      }>
+      s0 s15 XCHG
+      s0 16 s() XCHG
+      s13 s14 XCHG
+      s12 s13 XCHG
+      s11 s12 XCHG
+      s10 s11 XCHG
+      s9 s10 XCHG
+      s8 s9 XCHG
+      s7 s8 XCHG
+      s6 s7 XCHG
+      s5 s6 XCHG
+      s0 s4 XCHG
+      s1 s5 s5 XCHG3
+      s0 s3 XCHG
+      $ToncastDAO$_contract_store INLINECALLDICT
+    }>
+    16 s() POP
+    s14 16 s() XCHG
+    2 14 BLKSWAP
+    $ToncastDAO$_fun_checkAndUpdateEpoch INLINECALLDICT
+    $ToncastDAO$_contract_store INLINECALLDICT
+  }>
+  __tact_selector_hack PROC:<{
+    @atend @ 1 {
+            execute current@ context@ current!
+            {
+                // The core idea of this function is to save gas by avoiding unnecessary dict jump, when recv_internal/recv_external is called
+                // We want to extract recv_internal/recv_external from the dict and select needed function
+                // not by jumping to the needed function by it's index, but by using usual IF statements.
+                }END> b> // Close previous builder, now we have a cell of previous code on top of the stack
+                <{ // Start of the new code builder
+                    SETCP0
+                    // Swap the new code builder with the previous code, now we have previous code on top of the stack
+                    swap
+                    // Transform cell to slice and load first ref from the previous code, now we have the dict on top of the stack
+                    <s ref@
+                    // Extract the recv_internal from the dict
+                    dup 0 swap @procdictkeylen idict@ { "internal shortcut error" abort } ifnot
+                    swap
+                    // Delete the recv_internal from the dict
+                    0 swap @procdictkeylen idict- drop
+                    // Delete the recv_external from the dict (it's okay if it's not there)
+                    -1 swap @procdictkeylen idict- drop
+                    // Delete the __tact_selector_hack from the dict
+                    65535 swap @procdictkeylen idict- drop
+                    // Bring the code builder from the bottom of the stack
+                    // because if recv_external extraction is optional, and the number of elements on the stack is not fixed
+                    depth 1- roll
+                    // Swap with the dict from which we extracted recv_internal and (maybe) recv_external
+                    swap
+                    // Check if the dict is empty
+                    dup null?
+                    // Store a copy of this flag in the bottom of the stack
+                    dup depth 1- -roll
+                    {
+                        // If the dict is empty, just drop it (it will be null if it's empty)
+                        drop
+                    }
+                    {
+                        // If the dict is not empty, prepare continuation to be stored in c3
+                        <{
+                            // Save this dict as first ref in this continuation, it will be pushed in runtime by DICTPUSHCONST
+                            swap @procdictkeylen DICTPUSHCONST
+                            // Jump to the needed function by it's index
+                            DICTIGETJMPZ
+                            // If such key is not found, throw 11 along with the key as an argument
+                            11 THROWARG
+                        }> PUSHCONT
+                        // Store the continuation in c3
+                        c3 POP
+                    } cond
+                    // Function id is on top of the (runtime) stack
+                    DUP IFNOTJMP:<{
+                        // place recv_internal here
+                        DROP swap @addop
+                    }>
+                    // Bring back the flag, indicating if the dict is empty or not from the bottom of the stack
+                    depth 1- roll
+                    {
+                        // If the dict is empty, throw 11
+                        11 THROWARG
+                    }
+                    {
+                        // If the dict is not empty, jump to continuation from c3
+                        c3 PUSH JMPX
+                    } cond
+                }> b>
+            } : }END>c
+            current@ context! current!
+        } does @atend !
+  }>
+}END>c

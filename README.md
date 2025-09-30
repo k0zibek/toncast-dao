@@ -109,10 +109,18 @@ Each minted NFT uses custom on-chain metadata (TEP-64 standard):
 
 The contract owner has **limited privileges** for security:
 - 🔒 **No Parameter Updates**: NFT name prefix and image URL are immutable after deployment
-- ⚙️ **No Emergency Stop**: Contract operates autonomously without owner intervention
+- 🛑 **Stop and Redirect**: Owner can stop epoch creation and redirect rewards to a new DAO version
 - 🎯 **Decentralized Design**: Owner cannot modify staking parameters or withdraw user funds
 
-> This design ensures maximum security and decentralization - the owner cannot rug pull or modify critical parameters.
+### Stop and Redirect Mechanism
+When the owner sends a `StopAndRedirect` message:
+- ✅ **Deposits Continue**: Users can still deposit and mint NFTs
+- ✅ **Withdrawals Continue**: Users can still withdraw their staked tokens
+- ❌ **No New Epochs**: New epochs are no longer created
+- ➡️ **Funds Forwarded**: All accumulated TON rewards are forwarded to the new DAO address
+- 🔐 **Irreversible**: Once stopped, the contract cannot be restarted
+
+> This mechanism allows for smooth migration to upgraded DAO versions while protecting user funds.
 
 ## 📁 Project Structure
 
@@ -213,6 +221,7 @@ yarn blueprint create ContractName
 - **Proper Gas Calculation**: Withdrawal gas depends on number of epochs to process
 - **NFT Transfer**: Send NFT to DAO address to initiate withdrawal
 - **Batch Limits**: Maximum 100 epochs processed per transaction
+- **Migration Support**: Check `stopped` status and `newDaoAddress` in `getDAOConfigData()` before deposits
 
 ## 🔗 Related Repositories
 
